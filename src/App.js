@@ -5,7 +5,6 @@ import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import home from './components/Home'
 import register from './components/Register'
 import login from './components/Login'
-import icon from './icons/9193245.png'
 import './App.css'
 
 class App extends Component {
@@ -13,19 +12,29 @@ class App extends Component {
     super(props)
 
     this.state = {
-      array: ['9193245', '9123473', '9158477', '9172346', '9348576', '9376523', '9384574']
+      // Random images are titled with random numbers.
+      array: ['9193245.png', 
+              '9123473.png', 
+              '9158477.png', 
+              '9172346.png', 
+              '9348576.png', 
+              '9376523.png', 
+              '9384574.png']
     }
   }
+  randomNumberGet () {
+    return Math.floor(Math.random() * 6)
+  }
   render () {
-    //let random = 1
-    //let icon = './icons/'+this.state.array[random]+'.png'
+    let index = this.randomNumberGet()
+    let icon = require('./icons/'+this.state.array[index])
 
     return (
     <div className='App'>
       <Navbar className='dark-nav'>react-app</Navbar>
       <header className='App-header'>
         <Router basename='/'>
-        <Link to='/'><img src={icon} className="App-logo" alt="logo" /></Link>
+        <Link to='/'><img src={icon} className='App-logo' alt='logo' /></Link>
             <p>
               <Link to='/login' className='App-link'>Login</Link> or <Link to='/register' className='App-link'>register</Link>.
             </p>
