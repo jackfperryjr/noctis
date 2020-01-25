@@ -1,49 +1,56 @@
 import React, { Component } from 'react'
+import { BrowserRouter as Route, Link } from 'react-router-dom'
+import profile from './Profile'
 
 class Register extends Component {
     constructor (props) {
         super(props)
     
-        this.state = {}
+        this.state = {
+          // Random images are titled with random numbers.
+          array: ['9193245.png', 
+                  '9123473.png', 
+                  '9158477.png', 
+                  '9172346.png', 
+                  '9348576.png', 
+                  '9376523.png', 
+                  '9384574.png']
+        }
       }
-    componentDidMount () {
-
-    }
+      componentDidMount () {
+    
+      }
+      randomNumberGet () {
+        return Math.floor(Math.random() * 6)
+      }
     render () {
+        let index = this.randomNumberGet()
+        let icon = require('../icons/'+this.state.array[index])
       return (
-            <form style={{marginBottom: 52}}>
-                <h3>Register</h3>
-
+          <header className='App-header'>
+            <Link to='/'><img src={icon} className='App-logo' alt='logo' /></Link>
+            <p>
+              <Link to='/login' className='App-link'>Login</Link>
+            </p>
+            <form>
                 <div className="form-group">
-                    {/* <label>First name</label> */}
-                    <input type="text" className="form-control" placeholder="Username" />
+                    <input type="text" className="form-control" placeholder="username" />
                 </div>
-
                 <div className="form-group">
-                    {/* <label>Last name</label> */}
-                    <input type="text" className="form-control" placeholder="First name" />
+                    <input type="text" className="form-control" placeholder="first name" />
                 </div>
-
                 <div className="form-group">
-                    {/* <label>Email address</label> */}
-                    <input type="email" className="form-control" placeholder="Enter email" />
+                    <input type="email" className="form-control" placeholder="enter email" />
                 </div>
-
                 <div className="form-group">
-                    {/* <label>Password</label> */}
-                    <input type="password" className="form-control" placeholder="Enter password" />
+                    <input type="password" className="form-control" placeholder="enter password" />
                 </div>
-
                 <div className="form-group">
-                    {/* <label>Password</label> */}
-                    <input type="password" className="form-control" placeholder="Confirm password" />
+                    <input type="password" className="form-control" placeholder="confirm password" />
                 </div>
-
                 <button type="submit" className="btn btn-primary btn-block">Register</button>
-                {/* <p className="forgot-password text-right" style={{marginTop:30}}>
-                    Already registered? <a className="App-link" href="#">Login.</a>
-                </p> */}
-            </form>    
+            </form>  
+          </header>  
         )
     }
   }

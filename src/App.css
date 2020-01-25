@@ -4,7 +4,7 @@
 
 .App-logo {
   margin-top: 150px;
-  height: 40vmin;
+  height: calc(150px + 10vmin);
   pointer-events: none;
 }
 
