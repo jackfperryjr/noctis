@@ -29,7 +29,6 @@ class Login extends Component {
             'password': this.state.password,
             'audience': 'Aranea'
             }
-        console.log(payload)
         fetch('https://localhost:5001/api/login', {
             method: 'post',
             headers: {
@@ -54,12 +53,12 @@ class Login extends Component {
             </p>
             <form>
                 <div className="form-group">
-                    <input type="text" className="form-control" placeholder="enter username" onChange = {(e, value) => this.setState({username: e.target.value})}/>
+                    <input type="text" className="form-control" placeholder="enter username" onChange={(e) => this.setState({username: e.target.value})}/>
                 </div>
                 <div className="form-group">
-                    <input type="password" className="form-control" placeholder="enter password" onChange = {(e, value) => this.setState({password: e.target.value})}/>
+                    <input type="password" className="form-control" placeholder="enter password" onChange={(e) => this.setState({password: e.target.value})}/>
                 </div>
-                <button type="submit" className="btn btn-primary btn-block" onClick={(event) => this.handleLogin(event)}>Login</button>
+                <button type="submit" className="btn btn-primary btn-block" onClick={(e) => this.handleLogin(e)}>Login</button>
             </form>   
             </header>   
         )
