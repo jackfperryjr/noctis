@@ -12,7 +12,7 @@ class App extends Component {
   render () {
     return (
     <Router basename='/'>
-      <Navbar className='dark-nav'>react-app</Navbar>
+      <Navbar className='dark-nav' />
       
             <Route exact path='/' component={home} />
             <Route path='/register' component={register} />

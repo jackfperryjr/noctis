@@ -22,7 +22,8 @@ class Login extends Component {
     componentDidMount () {
 
     }
-    handleLogin () {
+    handleLogin (e) {
+        e.preventDefault()
         let payload = {
             'username': this.state.username,
             'password': this.state.password,
@@ -32,14 +33,12 @@ class Login extends Component {
         fetch('https://localhost:5001/api/login', {
             method: 'post',
             headers: {
-                'Accept': 'application/json',
+                'Accept': 'application/json, text/plain, */*',
                 'Content-Type': 'application/json',
               },
             body: JSON.stringify(payload)
-        }).then(function(response) {
-            console.log(response.json())
-            //return response.json()
-        })
+        }).then(response => response.json())
+          .then(response => console.log(response))
     }
     randomNumberGet () {
         return Math.floor(Math.random() * 6)
@@ -55,10 +54,10 @@ class Login extends Component {
             </p>
             <form>
                 <div className="form-group">
-                    <input type="text" className="form-control" placeholder="enter username" onChange = {(value) => this.setState({username: value})}/>
+                    <input type="text" className="form-control" placeholder="enter username" onChange = {(e, value) => this.setState({username: e.target.value})}/>
                 </div>
                 <div className="form-group">
-                    <input type="password" className="form-control" placeholder="enter password" onChange = {(value) => this.setState({password: value})}/>
+                    <input type="password" className="form-control" placeholder="enter password" onChange = {(e, value) => this.setState({password: e.target.value})}/>
                 </div>
                 <button type="submit" className="btn btn-primary btn-block" onClick={(event) => this.handleLogin(event)}>Login</button>
             </form>   

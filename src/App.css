@@ -10,7 +10,7 @@
 
 .dark-nav {
   width: 100vw;
-  border-bottom: 1px solid #808080;
+  /* border-bottom: 1px solid #808080; */
   background-color: #282c34;
   color: #61dafb;
   font-size: calc(10px + 2vmin);
