@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/noctis/static/css/main.51bce1b9.chunk.css",
-    "main.js": "/noctis/static/js/main.8761497b.chunk.js",
-    "main.js.map": "/noctis/static/js/main.8761497b.chunk.js.map",
+    "main.js": "/noctis/static/js/main.0846768e.chunk.js",
+    "main.js.map": "/noctis/static/js/main.0846768e.chunk.js.map",
     "runtime-main.js": "/noctis/static/js/runtime-main.21d902f3.js",
     "runtime-main.js.map": "/noctis/static/js/runtime-main.21d902f3.js.map",
     "static/css/2.47e06e2e.chunk.css": "/noctis/static/css/2.47e06e2e.chunk.css",
     "static/js/2.7d8c87f9.chunk.js": "/noctis/static/js/2.7d8c87f9.chunk.js",
     "static/js/2.7d8c87f9.chunk.js.map": "/noctis/static/js/2.7d8c87f9.chunk.js.map",
     "index.html": "/noctis/index.html",
-    "precache-manifest.af7d5cf08de66e0fc9e6b941da0f46a8.js": "/noctis/precache-manifest.af7d5cf08de66e0fc9e6b941da0f46a8.js",
+    "precache-manifest.3d197d66af557911b5d89e5b805a9540.js": "/noctis/precache-manifest.3d197d66af557911b5d89e5b805a9540.js",
     "service-worker.js": "/noctis/service-worker.js",
     "static/css/2.47e06e2e.chunk.css.map": "/noctis/static/css/2.47e06e2e.chunk.css.map",
     "static/css/main.51bce1b9.chunk.css.map": "/noctis/static/css/main.51bce1b9.chunk.css.map",
@@ -21,6 +21,6 @@
     "static/css/2.47e06e2e.chunk.css",
     "static/js/2.7d8c87f9.chunk.js",
     "static/css/main.51bce1b9.chunk.css",
-    "static/js/main.8761497b.chunk.js"
+    "static/js/main.0846768e.chunk.js"
   ]
 }

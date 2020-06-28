@@ -73,15 +73,15 @@ class Login extends Component {
   render () {
     const icon = require('../icons/chocoboapi.png')
     if (this.state.success === true) {
-      return <Redirect to="/profile" />
+      return <Redirect to="/noctis/profile" />
     } else
     {
       return (
         <header className='form-container'>
           <img src={icon} className='main-photo' alt='logo' />
           <p>Enter credentials</p>
-          <Route path='/' component={login} />
-          <Route path='/register' component={register} />
+          <Route path='/noctis/login' component={login} />
+          <Route path='/noctis/register' component={register} />
           <form>
             <div className='form-group'>
               <input type='text' className='form-control' placeholder='enter username' onChange={(e) => this.setState({ username: e.target.value })} />
@@ -91,7 +91,7 @@ class Login extends Component {
             </div>
             <button type='submit' className='btn btn-primary btn-block' onClick={(e) => this.handleLogin(e)}>Login</button>
           </form>
-          <p className='font-regular'>Or <Link to='/register' className='link'>register</Link></p>
+          <p className='font-regular'>Or <Link to='/noctis/register' className='link'>register</Link></p>
         </header>
       )
     }

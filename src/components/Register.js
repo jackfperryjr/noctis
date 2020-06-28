@@ -17,6 +17,7 @@ class Register extends Component {
   }
 
   handleRegistration (e) {
+    const that = this
     e.preventDefault()
     const payload = {
       username: this.state.username,
@@ -39,7 +40,10 @@ class Register extends Component {
         if (response.token) {
           sessionStorage.setItem('token', response.token);
           sessionStorage.setItem('user', JSON.stringify(response.user));
-          window.location.href = '/profile'
+          that.setState({
+            success: true,
+            user: response.user
+          })
         } else {
           console.log('registration failed')
         }
@@ -49,15 +53,15 @@ class Register extends Component {
   render () {
     const icon = require('../icons/chocoboapi.png')
     if (this.state.success === true) {
-      return <Redirect to="/profile" />
+      return <Redirect to="/noctis/profile" />
     } else
     {
       return (
         <header className='form-container'>
           <img src={icon} className='main-photo' alt='logo' />
           <p>Sign up!</p>
-          <Route exact path='/' component={login} />
-          <Route path='/login' component={login} />
+          <Route exact path='/noctis' component={login} />
+          <Route path='/noctis/login' component={login} />
           <form>
             <div className='form-group'>
               <input type='text' className='form-control' placeholder='username' onChange={(e) => this.setState({ username: e.target.value })} />
@@ -76,7 +80,7 @@ class Register extends Component {
             </div>
             <button type='submit' className='btn btn-primary btn-block' onClick={(e) => this.handleRegistration(e)}>Register</button>
           </form>
-          <p className='font-regular'>Or <Link to='/login' className='link'>login</Link></p>
+          <p className='font-regular'>Or <Link to='/noctis/login' className='link'>login</Link></p>
         </header>
       )
     }

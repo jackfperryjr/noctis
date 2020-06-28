@@ -25,7 +25,7 @@ class Profile extends Component {
   handleLogout (e) {
     document.getElementById('overlay').style.display = 'none'
     sessionStorage.clear()
-    this.props.history.push('/login')
+    this.props.history.push('/noctis')
   }
 
   render () {
@@ -46,7 +46,7 @@ class Profile extends Component {
         </header>
       )
     } else {
-      return <Redirect to="/login" />
+      return <Redirect to="/noctis" />
     }
   }
 }
