@@ -13,7 +13,7 @@ class App extends Component {
       <Router basename='/'>
         <Navbar className='dark-nav' />
 
-        <Route exact path='/' component={login} />
+        <Route exact path='/noctis' component={login} />
         <Route path='/register' component={register} />
         <Route path='/login' component={login} />
         <Route path='/profile' component={profile} />
