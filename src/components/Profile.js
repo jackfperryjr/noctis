@@ -25,6 +25,7 @@ class Profile extends Component {
   handleLogout (e) {
     document.getElementById('overlay').style.display = 'none'
     sessionStorage.clear()
+    this.props.history.push('/login')
   }
 
   render () {
