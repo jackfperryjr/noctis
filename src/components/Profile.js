@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { BrowserRouter as Route, Link, Redirect} from 'react-router-dom'
 
 class Profile extends Component {
   constructor (props) {
