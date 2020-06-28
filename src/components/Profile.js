@@ -44,7 +44,7 @@ class Profile extends Component {
         </header>
       )
     } else {
-      window.location.href = '/login'
+      return <Redirect to="/login" />
     }
   }
 }
