@@ -14,8 +14,9 @@ class App extends Component {
         <Navbar className='dark-nav' />
 
         <Route exact path='/noctis' component={login} />
-        <Route path='/register' component={register} />
+        <Route path='/' component={login} />
         <Route path='/login' component={login} />
+        <Route path='/register' component={register} />
         <Route path='/profile' component={profile} />
       </Router>
     )
