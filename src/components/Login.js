@@ -10,15 +10,23 @@ class Login extends Component {
     this.state = {
       username: '',
       password: '',
+      user: {},
       success: false
     }
   }
 
   componentDidMount () {
     document.getElementById('overlay').style.display = 'none'
+    if (sessionStorage.token) {
+      let user = JSON.parse(sessionStorage.user);
+      this.setState({
+        success: true,
+        user: user
+      })
+    }
   }
 
-  validateForm() {
+  validateForm () {
     if (this.state.username.length > 0 && this.state.username.length > 0) {
       return true
     } else {
@@ -28,6 +36,7 @@ class Login extends Component {
 
   handleLogin (e) {
     if (this.validateForm()) {
+      const that = this
       document.getElementById('overlay').style.display = 'block'
       e.preventDefault()
       const payload = {
@@ -47,7 +56,10 @@ class Login extends Component {
           if (response.token) {
             sessionStorage.setItem('token', response.token);
             sessionStorage.setItem('user', JSON.stringify(response.user));
-            window.location.href = '/profile'
+            that.setState({
+              success: true,
+              user: response.user
+            })
           } else {
             console.log('failed login')
             document.getElementById('overlay').style.display = 'none'
@@ -68,7 +80,7 @@ class Login extends Component {
         <header className='form-container'>
           <img src={icon} className='main-photo' alt='logo' />
           <p>Enter credentials</p>
-          <Route exact path='/' component={login} />
+          <Route path='/' component={login} />
           <Route path='/register' component={register} />
           <form>
             <div className='form-group'>
