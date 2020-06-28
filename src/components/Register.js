@@ -16,42 +16,74 @@ class Register extends Component {
     }
   }
 
+  validateForm () {
+    let error = 0
+    if (this.state.username.length < 6) {
+      error = 1
+    } 
+    if (this.state.email.length < 6) {
+      error = 1
+    } 
+    if (this.state.firstname.length === 0) {
+      error = 1
+    } 
+    if (this.state.password.length < 9) {
+      error = 1
+    } 
+    if (this.state.password.length > 6 && this.state.password != this.state.confirmpassword) {
+      error = 1
+    } 
+
+    if (error === 1) {
+      document.getElementById('validation-error').style.display = 'block'
+      return false
+    } else {
+      document.getElementById('validation-error').style.display = 'none'
+      return true
+    }
+  }
+
   handleRegistration (e) {
     const that = this
     e.preventDefault()
-    const payload = {
-      username: this.state.username,
-      firstname: this.state.firstname,
-      email: this.state.email,
-      password: this.state.password,
-      confirmpassword: this.state.confirmpassword,
-      audience: 'MoogleApi'
+    document.getElementById('validation-error').style.display = 'none'
+    if (this.validateForm()) {
+      const payload = {
+        username: this.state.username,
+        firstname: this.state.firstname,
+        email: this.state.email,
+        password: this.state.password,
+        confirmpassword: this.state.confirmpassword,
+        audience: 'MoogleApi'
+      }
+      fetch('https://chocoboapi.azurewebsites.net/v1/account/register', {
+        method: 'post',
+        headers: {
+          Accept: 'application/json, text/plain, */*',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      }).then(response => response.json())
+        .then(function(response){
+          document.getElementById('overlay').style.display = 'none'
+          if (response.token) {
+            sessionStorage.setItem('token', response.token);
+            sessionStorage.setItem('user', JSON.stringify(response.user));
+            that.setState({
+              success: true,
+              user: response.user
+            })
+          } else {
+            console.log('registration failed')
+          }
+        })
+    } else {
+
     }
-    fetch('https://chocoboapi.azurewebsites.net/v1/account/register', {
-      method: 'post',
-      headers: {
-        Accept: 'application/json, text/plain, */*',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(payload)
-    }).then(response => response.json())
-      .then(function(response){
-        document.getElementById('overlay').style.display = 'none'
-        if (response.token) {
-          sessionStorage.setItem('token', response.token);
-          sessionStorage.setItem('user', JSON.stringify(response.user));
-          that.setState({
-            success: true,
-            user: response.user
-          })
-        } else {
-          console.log('registration failed')
-        }
-      })
   }
 
   render () {
-    const icon = require('../icons/chocoboapi.png')
+    const icon = require('../icons/chocoboapi-c-2.png')
     if (this.state.success === true) {
       return <Redirect to="/noctis/profile" />
     } else
@@ -78,6 +110,7 @@ class Register extends Component {
             <div className='form-group'>
               <input type='password' className='form-control' placeholder='confirm password' onChange={(e) => this.setState({ confirmpassword: e.target.value })} />
             </div>
+            <div id='validation-error'>form validation failed</div>
             <button type='submit' className='btn btn-primary btn-block' onClick={(e) => this.handleRegistration(e)}>Register</button>
           </form>
           <p className='font-regular'>Or <Link to='/noctis/login' className='link'>login</Link></p>

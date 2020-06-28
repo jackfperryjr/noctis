@@ -30,15 +30,18 @@ class Login extends Component {
     if (this.state.username.length > 0 && this.state.username.length > 0) {
       return true
     } else {
+      document.getElementById('validation-error').style.display = 'block'
       return false
     }
   }
 
   handleLogin (e) {
+    e.preventDefault()
+    document.getElementById('login-error').style.display = 'none'
+    document.getElementById('validation-error').style.display = 'none'
     if (this.validateForm()) {
       const that = this
       document.getElementById('overlay').style.display = 'block'
-      e.preventDefault()
       const payload = {
         username: this.state.username,
         password: this.state.password,
@@ -63,6 +66,7 @@ class Login extends Component {
           } else {
             console.log('failed login')
             document.getElementById('overlay').style.display = 'none'
+            document.getElementById('login-error').style.display = 'block'
           }
         })
       } else {
@@ -71,7 +75,7 @@ class Login extends Component {
   }
 
   render () {
-    const icon = require('../icons/chocoboapi.png')
+    const icon = require('../icons/chocoboapi-c-2.png')
     if (this.state.success === true) {
       return <Redirect to="/noctis/profile" />
     } else
@@ -89,6 +93,8 @@ class Login extends Component {
             <div className='form-group'>
               <input type='password' className='form-control' placeholder='enter password' onChange={(e) => this.setState({ password: e.target.value })} />
             </div>
+            <div id='login-error'>invalid credentials</div>
+            <div id='validation-error'>enter your credentials</div>
             <button type='submit' className='btn btn-primary btn-block' onClick={(e) => this.handleLogin(e)}>Login</button>
           </form>
           <p className='font-regular'>Or <Link to='/noctis/register' className='link'>register</Link></p>
