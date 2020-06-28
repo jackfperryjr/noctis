@@ -34,7 +34,7 @@
       "last 1 safari version"
     ]
   },
-    "devDependencies": {
-      "standard": "^14.3.1"
+  "devDependencies": {
+    "standard": "^14.3.1"
   }
 }

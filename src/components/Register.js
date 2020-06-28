@@ -1,60 +1,85 @@
 import React, { Component } from 'react'
-import { BrowserRouter as Route, Link } from 'react-router-dom'
-import profile from './Profile'
+import { BrowserRouter as Route, Link, Redirect } from 'react-router-dom'
+import login from './Login'
 
 class Register extends Component {
   constructor (props) {
     super(props)
 
     this.state = {
-      // Random images are titled with random numbers.
-      array: ['9193245.png',
-        '9123473.png',
-        '9158477.png',
-        '9172346.png',
-        '9348576.png',
-        '9376523.png',
-        '9384574.png']
+      username: '',
+      firstname: '',
+      email: '',
+      password: '',
+      confirmpassword: '',
+      success: false
     }
   }
 
-  componentDidMount () {
-
-  }
-
-  randomNumberGet () {
-    return Math.floor(Math.random() * 6)
+  handleRegistration (e) {
+    e.preventDefault()
+    const payload = {
+      username: this.state.username,
+      firstname: this.state.firstname,
+      email: this.state.email,
+      password: this.state.password,
+      confirmpassword: this.state.confirmpassword,
+      audience: 'MoogleApi'
+    }
+    fetch('https://chocoboapi.azurewebsites.net/v1/account/register', {
+      method: 'post',
+      headers: {
+        Accept: 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(payload)
+    }).then(response => response.json())
+      .then(function(response){
+        document.getElementById('overlay').style.display = 'none'
+        if (response.token) {
+          sessionStorage.setItem('token', response.token);
+          sessionStorage.setItem('user', JSON.stringify(response.user));
+          window.location.href = '/profile'
+        } else {
+          console.log('registration failed')
+        }
+      })
   }
 
   render () {
-    const index = this.randomNumberGet()
-    const icon = require('../icons/' + this.state.array[index])
-    return (
-      <header className='App-header'>
-        <Link to='/'><img src={icon} className='App-logo' alt='logo' /></Link>
-        <p>
-          <Link to='/login' className='App-link'>Login</Link>
-        </p>
-        <form>
-          <div className='form-group'>
-            <input type='text' className='form-control' placeholder='username' />
-          </div>
-          <div className='form-group'>
-            <input type='text' className='form-control' placeholder='first name' />
-          </div>
-          <div className='form-group'>
-            <input type='email' className='form-control' placeholder='enter email' />
-          </div>
-          <div className='form-group'>
-            <input type='password' className='form-control' placeholder='enter password' />
-          </div>
-          <div className='form-group'>
-            <input type='password' className='form-control' placeholder='confirm password' />
-          </div>
-          <button type='submit' className='btn btn-primary btn-block'>Register</button>
-        </form>
-      </header>
-    )
+    const icon = require('../icons/chocoboapi.png')
+    if (this.state.success === true) {
+      return <Redirect to="/profile" />
+    } else
+    {
+      return (
+        <header className='form-container'>
+          <img src={icon} className='main-photo' alt='logo' />
+          <p>Sign up!</p>
+          <Route exact path='/' component={login} />
+          <Route path='/login' component={login} />
+          <form>
+            <div className='form-group'>
+              <input type='text' className='form-control' placeholder='username' onChange={(e) => this.setState({ username: e.target.value })} />
+            </div>
+            <div className='form-group'>
+              <input type='text' className='form-control' placeholder='first name' onChange={(e) => this.setState({ firstname: e.target.value })} />
+            </div>
+            <div className='form-group'>
+              <input type='email' className='form-control' placeholder='enter email' onChange={(e) => this.setState({ email: e.target.value })} />
+            </div>
+            <div className='form-group'>
+              <input type='password' className='form-control' placeholder='enter password' onChange={(e) => this.setState({ password: e.target.value })} />
+            </div>
+            <div className='form-group'>
+              <input type='password' className='form-control' placeholder='confirm password' onChange={(e) => this.setState({ confirmpassword: e.target.value })} />
+            </div>
+            <button type='submit' className='btn btn-primary btn-block' onClick={(e) => this.handleRegistration(e)}>Register</button>
+          </form>
+          <p className='font-regular'>Or <Link to='/login' className='link'>login</Link></p>
+        </header>
+      )
+    }
   }
 }
 
