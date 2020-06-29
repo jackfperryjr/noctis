@@ -14,7 +14,7 @@ class Profile extends Component {
   componentWillMount () {
     document.getElementById('overlay').style.display = 'none'
     if (sessionStorage.token) {
-      let user = JSON.parse(sessionStorage.user);
+      let user = JSON.parse(sessionStorage.user)
       this.setState({
         success: true,
         user: user
@@ -32,7 +32,10 @@ class Profile extends Component {
     if (this.state.success === true) {
       return (
         <header className='form-container'>
-          <img className='profile-photo' src={this.state.user.photo} alt={this.state.user.userName} />
+          <div className='profile-container'>
+            <img className='wallpaper-photo' src={this.state.user.wallpaper} alt={this.state.user.userName} />
+            <img className='profile-photo' src={this.state.user.photo} alt={this.state.user.userName} />
+          </div>
           <p>{this.state.user.roleName}</p>
           <form>
             <div className='form-group'>
@@ -41,7 +44,11 @@ class Profile extends Component {
             <div className='form-group'>
               <input type='text' className='form-control' value={this.state.user.firstName} />
             </div>
-            <button type='submit' className='btn btn-primary btn-block' onClick={(e) => this.handleLogout(e)}>Logout</button>
+            <div className='button-container'>
+              <button type='submit' className='btn btn-primary' onClick={(e) => this.handleLogout(e)}>Logout</button>
+              <button type='submit' className='btn btn-success'>Update</button>
+              <button type='submit' className='btn btn-danger'>Delete Account</button>
+            </div>
           </form>
         </header>
       )

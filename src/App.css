@@ -15,10 +15,26 @@
   z-index: 1000;
 }
 
+.profile-container {
+  text-align: center;
+}
+
+.button-container > button {
+  margin: 5px;
+}
+
 .profile-photo {
   height: calc(150px + 10vmin);
   pointer-events: none;
-  margin: 10px;
+  margin: -170px 10px 10px 10px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+}
+
+.wallpaper-photo {
+  width: 100vw;
+  height: 200px;
+  object-fit: cover;
 }
 
 .main-photo {

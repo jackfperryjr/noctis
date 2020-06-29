@@ -30,7 +30,7 @@ class Register extends Component {
     if (this.state.password.length < 9) {
       error = 1
     } 
-    if (this.state.password.length > 6 && this.state.password != this.state.confirmpassword) {
+    if (this.state.password.length > 6 && this.state.password !== this.state.confirmpassword) {
       error = 1
     } 
 
