@@ -88,7 +88,7 @@ class Login extends Component {
           <Route path='/noctis/register' component={register} />
           <form>
             <div className='form-group'>
-              <input type='text' className='form-control' placeholder='enter username' onChange={(e) => this.setState({ username: e.target.value })} />
+              <input type='text' className='form-control login-username' placeholder='enter username' onChange={(e) => this.setState({ username: e.target.value })} />
             </div>
             <div className='form-group'>
               <input type='password' className='form-control' placeholder='enter password' onChange={(e) => this.setState({ password: e.target.value })} />

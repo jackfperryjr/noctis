@@ -96,7 +96,7 @@ class Register extends Component {
           <Route path='/noctis/login' component={login} />
           <form>
             <div className='form-group'>
-              <input type='text' className='form-control' placeholder='username' onChange={(e) => this.setState({ username: e.target.value })} />
+              <input type='text' className='form-control login-username' placeholder='username' onChange={(e) => this.setState({ username: e.target.value })} />
             </div>
             <div className='form-group'>
               <input type='text' className='form-control' placeholder='first name' onChange={(e) => this.setState({ firstname: e.target.value })} />
