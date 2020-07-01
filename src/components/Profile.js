@@ -70,7 +70,6 @@ class Profile extends Component {
         body: JSON.stringify(payload)
       }).then(response => response.json())
         .then(function(response) {
-          debugger
           document.getElementById('overlay').style.display = 'none'
           if (response.user) {
             sessionStorage.setItem('user', JSON.stringify(response.user));
@@ -130,7 +129,7 @@ class Profile extends Component {
             <div className='input-group'>
                 <input type='number' className='form-control' defaultValue={user.age} placeholder='00' onChange={(e) => this.setState({ age: e.target.value })} />
                 <span>&nbsp;</span>
-                <input type='date' className='form-control' defaultValue={moment(user.birthDate).format('MM/DD/yyyy')} onChange={(e) => this.setState({ birthdate: e.target.value })} />
+                <input type='date' className='form-control' defaultValue={moment(user.birthDate).format('YYYY-MM-DD')} onChange={(e) => this.setState({ birthdate: e.target.value })} />
             </div>
             <div className='input-group'>
                 <input type='text' className='form-control' defaultValue={user.city} placeholder='city' onChange={(e) => this.setState({ city: e.target.value })} />

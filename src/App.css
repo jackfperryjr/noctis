@@ -77,6 +77,10 @@ form {
   margin: 10px;
 }
 
+.form-control {
+  background-color : #09090a; 
+}
+
 .form-container {
   padding-top: 100px;
   background-color: #282c34;
