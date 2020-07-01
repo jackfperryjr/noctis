@@ -113,11 +113,11 @@ class Profile extends Component {
             <img className='wallpaper-photo' src={user.wallpaper} alt={user.userName} />
             <img className='profile-photo' src={user.photo} alt={user.userName} />
           </div>
-          <p className='font-weight-bold'>{user.userName}</p>
+          <p className='font-weight-bold login-username'>{user.userName}</p>
           <p className='font-small text-secondary'>Joined: {moment(user.joinDate).format('MM/DD/yyyy')}</p>
           <form className='form-profile'>
           <div className='input-group input-group-override'>
-                <input type='text' className='form-control' defaultValue={user.userName} placeholder='user name' onChange={(e) => this.setState({ username: e.target.value })} />
+                <input type='text' className='form-control login-username' defaultValue={user.userName} placeholder='user name' onChange={(e) => this.setState({ username: e.target.value })} />
                 <span>&nbsp;</span>
                 <input type='text' className='form-control' defaultValue={user.email} placeholder='email' onChange={(e) => this.setState({ email: e.target.value })} />
             </div>
