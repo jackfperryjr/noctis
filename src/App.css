@@ -35,8 +35,8 @@
 }
 
 .profile-photo {
-  height: calc(100px + 10vmin);
-  width: calc(100px + 10vmin);
+  height: calc(150px + 10vmin);
+  width: calc(150px + 10vmin);
   pointer-events: none;
   margin: -170px 10px 10px 10px;
   border-radius: 50%;
