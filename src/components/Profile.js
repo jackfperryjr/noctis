@@ -14,7 +14,9 @@ class Profile extends Component {
       age: '',
       birthdate: '',
       city: '',
-      state: ''
+      state: '',
+      photo: '',
+      wallpaper: ''
     }
   }
 
@@ -36,6 +38,25 @@ class Profile extends Component {
     console.log('user deleted')
   }
 
+  handleResponseErrors (error) {
+    let password = error.Password
+    let cpassword = error.ConfirmPassword
+    let email = error.Email
+    let display = ''
+
+    if (email !==  undefined) {
+      display = email
+    }
+    if (password !== undefined) {
+      display += '<br/>' + password
+    }
+    if (cpassword !== undefined) {
+      display += '<br/>' + cpassword
+    }
+    document.getElementById('validation-error').innerHTML = display
+    document.getElementById('validation-error').style.display = 'block'
+  }
+
   handleLogout (e) {
     document.getElementById('overlay').style.display = 'none'
     sessionStorage.clear()
@@ -48,25 +69,24 @@ class Profile extends Component {
     const token = sessionStorage.token
     const user = JSON.parse(sessionStorage.user)
     if (this.validateForm()) {
-      const payload = {
-        id: user.id,
-        username: (this.state.username === '') ? user.userName : this.state.username,
-        email: (this.state.email === '') ? user.email : this.state.email,
-        firstname: (this.state.firstname === '') ? user.firstName : this.state.firstname,
-        lastname: (this.state.lastname === '') ? user.lastName : this.state.lastname,
-        age: (this.state.age === '') ? user.age : this.state.age,
-        birthdate: (this.state.birthdate === '') ? user.birthDate : this.state.birthdate,
-        city: (this.state.city === '') ? user.city : this.state.city,
-        state: (this.state.state === '') ? user.state : this.state.state
-      }
+      let payload = new FormData()
+      payload.append('id', user.id)
+      payload.append('photo', (this.state.photo === '') ? user.photo : document.forms['profile-form']['upload-photo'].files[0])
+      payload.append('wallpaper', (this.state.wallpaper === '') ? user.wallpaper : document.forms['profile-form']['upload-wallpaper'].files[0])
+      payload.append('username', (this.state.username === '') ? user.userName : this.state.username)
+      payload.append('email', (this.state.email === '') ? user.email : this.state.email)
+      payload.append('firstname', (this.state.firstname === '') ? user.firstName : this.state.firstname)
+      payload.append('lastname', (this.state.lastname === '') ? user.lastName : this.state.lastname)
+      payload.append('age', (this.state.age === '') ? user.age : this.state.age)
+      payload.append('birthdate', (this.state.birthdate === '') ? user.birthDate : this.state.birthdate)
+      payload.append('city', (this.state.city === '') ? user.city : this.state.city)
+      payload.append('state', (this.state.state === '') ? user.state : this.state.state)
       fetch('https://chocoboapi.azurewebsites.net/v1/manage/update', {
         method: 'put',
         headers: {
-          Accept: 'application/json, text/plain, */*',
-          'Content-Type': 'application/json',
           'Authorization': 'Bearer ' + token
         },
-        body: JSON.stringify(payload)
+        body: payload
       }).then(response => response.json())
         .then(function(response) {
           document.getElementById('overlay').style.display = 'none'
@@ -74,6 +94,8 @@ class Profile extends Component {
             sessionStorage.setItem('user', JSON.stringify(response.user));
           } else {
             console.log('update failed')
+            console.log(response.errors)
+            //that.handleResponseErrors(response.errors)
           }
         })
     } else {
@@ -103,18 +125,28 @@ class Profile extends Component {
     }
   }
 
+  handleProfilePhotoChange (e) {
+    let img = URL.createObjectURL(e.target.files[0]);
+    if (img) {
+      document.getElementById('profile-photo').src = img
+      this.setState({ photo: e.target.value })
+    }
+  }
+
   render () {
     if (this.isLoggedIn()) {
       const user = JSON.parse(sessionStorage.user)
       return (
         <header className='form-container'>
+          <form name='profile-form' id='profile-form' className='form-profile' encType='multipart/form-data' method='put'>
           <div className='profile-container'>
-            <img className='wallpaper-photo' src={user.wallpaper} alt={user.userName} />
-            <img className='profile-photo' src={user.photo} alt={user.userName} />
+            <img id='wallpaper-photo' className='wallpaper-photo' src={user.wallpaper} alt={user.userName} />
+            <input id="upload-wallpaper" type="file" accept="image/*" name="wallpaper" />
+            <img id='profile-photo' className='profile-photo' src={user.photo} alt={user.userName} />
+            <input id="upload-photo" type="file" accept="image/*" name="photo" onInput={(e) => this.handleProfilePhotoChange(e)} />
           </div>
           <p className='font-weight-bold login-username'>{user.userName}</p>
           <p className='font-small text-secondary'>Joined: {moment(user.joinDate).format('MM/DD/yyyy')}</p>
-          <form className='form-profile'>
           <div className='input-group input-group-override'>
                 <input type='text' className='form-control login-username' defaultValue={user.userName} placeholder='user name' onChange={(e) => this.setState({ username: e.target.value })} />
                 <span>&nbsp;</span>
