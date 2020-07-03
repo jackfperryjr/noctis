@@ -125,6 +125,10 @@ class Profile extends Component {
     }
   }
 
+  handlePhotoUpload = () => {
+    document.getElementById('upload-photo').click()
+  }
+
   handleProfilePhotoChange (e) {
     let img = URL.createObjectURL(e.target.files[0]);
     if (img) {
@@ -138,13 +142,11 @@ class Profile extends Component {
       const user = JSON.parse(sessionStorage.user)
       return (
         <header className='form-container'>
-          <form name='profile-form' id='profile-form' className='form-profile' encType='multipart/form-data' method='put'>
+          <img id='wallpaper-photo' className='wallpaper-photo' src={user.wallpaper} alt={user.userName} />
           <div className='profile-container'>
-            <img id='wallpaper-photo' className='wallpaper-photo' src={user.wallpaper} alt={user.userName} />
-            <input id="upload-wallpaper" type="file" accept="image/*" name="wallpaper" />
-            <img id='profile-photo' className='profile-photo' src={user.photo} alt={user.userName} />
-            <input id="upload-photo" type="file" accept="image/*" name="photo" onInput={(e) => this.handleProfilePhotoChange(e)} />
+            <img id='profile-photo' className='profile-photo' src={user.photo} alt={user.userName} onClick={this.handlePhotoUpload}/>
           </div>
+          <form name='profile-form' id='profile-form' className='form-profile' encType='multipart/form-data' method='put'>
           <p className='font-weight-bold login-username'>{user.userName}</p>
           <p className='font-small text-secondary'>Joined: {moment(user.joinDate).format('MM/DD/yyyy')}</p>
           <div className='input-group input-group-override'>
@@ -168,6 +170,8 @@ class Profile extends Component {
                 <input type='text' className='form-control' defaultValue={user.state} placeholder='state' onChange={(e) => this.setState({ state: e.target.value })} />
             </div>
             <div id='validation-error'>form validation failed</div>
+            <input id="upload-photo" type="file" accept="image/*" name="photo" ref='photoUploader' onChange={(e) => this.handleProfilePhotoChange(e)} />
+            <input id="upload-wallpaper" type="file" accept="image/*" name="wallpaper" />
             <div className='button-container'>
               <button type='submit' title='Logout' className='btn btn-secondary btn-profile' onClick={(e) => this.handleLogout(e)}><i className='fas fa-door-closed'></i></button>
               <button type='submit' title='Update Information' className='btn btn-primary btn-profile' onClick={(e) => this.handleUserUpdate(e)}><i className='fas fa-user-edit'></i></button>

@@ -82,7 +82,7 @@ class Login extends Component {
     } else
     {
       return (
-        <header className='form-container'>
+        <header className='form-container login-screen'>
           <img src={icon} className='main-photo' alt='logo' />
           <p>Enter credentials</p>
           <Route path='/noctis/login' component={login} />
