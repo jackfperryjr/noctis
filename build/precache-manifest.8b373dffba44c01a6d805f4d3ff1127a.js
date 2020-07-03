@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "0f7441bc28aa7b56a2173a521857ba1a",
+    "revision": "64e2030ad4146d8b90faddf34a39d5b1",
     "url": "/noctis/index.html"
   },
   {

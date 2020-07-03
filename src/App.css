@@ -36,6 +36,7 @@
 
 .profile-photo {
   height: calc(150px + 10vmin);
+  width: calc(150px + 10vmin);
   pointer-events: none;
   margin: -170px 10px 10px 10px;
   border-radius: 50%;
@@ -139,6 +140,8 @@ input[type="number"]:focus  {
   font-size: 12px;
   color: #c0c;
   margin: 5% auto 15px auto;
+  width: 200px;
+  max-width: 200px;
 }
 
 @media (prefers-reduced-motion: no-preference) {

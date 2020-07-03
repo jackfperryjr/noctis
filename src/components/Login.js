@@ -65,6 +65,7 @@ class Login extends Component {
             })
           } else {
             console.log('failed login')
+            console.log(response.message)
             document.getElementById('overlay').style.display = 'none'
             document.getElementById('login-error').style.display = 'block'
           }

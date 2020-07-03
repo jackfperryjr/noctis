@@ -27,12 +27,12 @@ class Register extends Component {
     if (this.state.firstname.length === 0) {
       error = 1
     } 
-    if (this.state.password.length < 9) {
-      error = 1
-    } 
-    if (this.state.password.length > 6 && this.state.password !== this.state.confirmpassword) {
-      error = 1
-    } 
+    // if (this.state.password.length < 6 || this.state.password.length > 12) {
+    //   error = 1
+    // } 
+    // if (this.state.password.length > 6 && this.state.password !== this.state.confirmpassword) {
+    //   error = 1
+    // } 
 
     if (error === 1) {
       document.getElementById('validation-error').style.display = 'block'
@@ -41,6 +41,25 @@ class Register extends Component {
       document.getElementById('validation-error').style.display = 'none'
       return true
     }
+  }
+
+  handleResponseErrors (error) {
+    let password = error.Password
+    let cpassword = error.ConfirmPassword
+    let email = error.Email
+    let display = ''
+
+    if (email !==  undefined) {
+      display = email
+    }
+    if (password !== undefined) {
+      display += '<br/>' + password
+    }
+    if (cpassword !== undefined) {
+      display += '<br/>' + cpassword
+    }
+    document.getElementById('validation-error').innerHTML = display
+    document.getElementById('validation-error').style.display = 'block'
   }
 
   handleRegistration (e) {
@@ -54,7 +73,7 @@ class Register extends Component {
         email: this.state.email,
         password: this.state.password,
         confirmpassword: this.state.confirmpassword,
-        audience: 'MoogleApi'
+        audience: 'ChocoboApi'
       }
       fetch('https://chocoboapi.azurewebsites.net/v1/account/register', {
         method: 'post',
@@ -75,10 +94,12 @@ class Register extends Component {
             })
           } else {
             console.log('registration failed')
+            console.log(response.errors)
+            that.handleResponseErrors(response.errors)
           }
         })
     } else {
-
+        console.log('validation failed')
     }
   }
 

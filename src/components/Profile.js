@@ -47,7 +47,6 @@ class Profile extends Component {
     document.getElementById('overlay').style.display = 'block'
     const token = sessionStorage.token
     const user = JSON.parse(sessionStorage.user)
-    const that = this
     if (this.validateForm()) {
       const payload = {
         id: user.id,
@@ -78,7 +77,7 @@ class Profile extends Component {
           }
         })
     } else {
-
+      console.log('validation failed')
     }
   }
 
