@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/noctis/static/css/main.e4b4e81b.chunk.css",
-    "main.js": "/noctis/static/js/main.8df3a9f1.chunk.js",
-    "main.js.map": "/noctis/static/js/main.8df3a9f1.chunk.js.map",
+    "main.css": "/noctis/static/css/main.55607d3c.chunk.css",
+    "main.js": "/noctis/static/js/main.d8e29d49.chunk.js",
+    "main.js.map": "/noctis/static/js/main.d8e29d49.chunk.js.map",
     "runtime-main.js": "/noctis/static/js/runtime-main.21d902f3.js",
     "runtime-main.js.map": "/noctis/static/js/runtime-main.21d902f3.js.map",
     "static/css/2.47e06e2e.chunk.css": "/noctis/static/css/2.47e06e2e.chunk.css",
     "static/js/2.c3ed34de.chunk.js": "/noctis/static/js/2.c3ed34de.chunk.js",
     "static/js/2.c3ed34de.chunk.js.map": "/noctis/static/js/2.c3ed34de.chunk.js.map",
     "index.html": "/noctis/index.html",
-    "precache-manifest.439ae38a27e0730f9104d0846ab2f552.js": "/noctis/precache-manifest.439ae38a27e0730f9104d0846ab2f552.js",
+    "precache-manifest.2e8b96a4c370222005fe39104ad32007.js": "/noctis/precache-manifest.2e8b96a4c370222005fe39104ad32007.js",
     "service-worker.js": "/noctis/service-worker.js",
     "static/css/2.47e06e2e.chunk.css.map": "/noctis/static/css/2.47e06e2e.chunk.css.map",
-    "static/css/main.e4b4e81b.chunk.css.map": "/noctis/static/css/main.e4b4e81b.chunk.css.map",
+    "static/css/main.55607d3c.chunk.css.map": "/noctis/static/css/main.55607d3c.chunk.css.map",
     "static/js/2.c3ed34de.chunk.js.LICENSE": "/noctis/static/js/2.c3ed34de.chunk.js.LICENSE",
     "static/media/chocoboapi-c-2.png": "/noctis/static/media/chocoboapi-c-2.fb4ca4e1.png"
   },
@@ -20,7 +20,7 @@
     "static/js/runtime-main.21d902f3.js",
     "static/css/2.47e06e2e.chunk.css",
     "static/js/2.c3ed34de.chunk.js",
-    "static/css/main.e4b4e81b.chunk.css",
-    "static/js/main.8df3a9f1.chunk.js"
+    "static/css/main.55607d3c.chunk.css",
+    "static/js/main.d8e29d49.chunk.js"
   ]
 }

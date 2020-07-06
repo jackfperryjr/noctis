@@ -95,7 +95,6 @@ class Profile extends Component {
           } else {
             console.log('update failed')
             console.log(response.errors)
-            //that.handleResponseErrors(response.errors)
           }
         })
     } else {
@@ -105,15 +104,6 @@ class Profile extends Component {
 
   validateForm() {
     let error = 0
-    // if (this.state.username.length < 6) {
-    //   error = 1
-    // } 
-    // if (this.state.firstname.length === 0) {
-    //   error = 1
-    // } 
-    // if (this.state.email.length === 0) {
-    //   error = 1
-    // } 
 
     if (error === 1) {
       document.getElementById('overlay').style.display = 'none'
@@ -142,11 +132,14 @@ class Profile extends Component {
       const user = JSON.parse(sessionStorage.user)
       return (
         <header className='form-container'>
-          <img id='wallpaper-photo' className='wallpaper-photo' src={user.wallpaper} alt={user.userName} />
           <div className='profile-container'>
+            <img id='wallpaper-photo' className='wallpaper-photo' src={user.wallpaper} alt={user.userName} />
             <img id='profile-photo' className='profile-photo' src={user.photo} alt={user.userName} onClick={this.handlePhotoUpload}/>
+            <div className='camera-container'>
+              <i className="fas fa-camera"></i>
+            </div>
           </div>
-          <form name='profile-form' id='profile-form' className='form-profile' encType='multipart/form-data' method='put'>
+          <form name='profile-form' id='profile-form' className='profile-form' encType='multipart/form-data' method='put'>
           <p className='font-weight-bold login-username'>{user.userName}</p>
           <p className='font-small text-secondary'>Joined: {moment(user.joinDate).format('MM/DD/yyyy')}</p>
           <div className='input-group input-group-override'>
