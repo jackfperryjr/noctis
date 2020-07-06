@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "64aeeeb880ee43c24f02cfbe524ebfc5",
+    "revision": "6bcbd62fa4c31f9d74c75b082901e8f5",
     "url": "/noctis/index.html"
   },
   {
@@ -8,8 +8,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/noctis/static/css/2.47e06e2e.chunk.css"
   },
   {
-    "revision": "a9fc6ac922c6266f1d98",
-    "url": "/noctis/static/css/main.10f8b997.chunk.css"
+    "revision": "90afb3a0137f96891613",
+    "url": "/noctis/static/css/main.ce6ed532.chunk.css"
   },
   {
     "revision": "ba40a91ca03aec12a90c",
@@ -20,7 +20,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/noctis/static/js/2.c3ed34de.chunk.js.LICENSE"
   },
   {
-    "revision": "a9fc6ac922c6266f1d98",
+    "revision": "90afb3a0137f96891613",
     "url": "/noctis/static/js/main.8a6da750.chunk.js"
   },
   {

@@ -110,7 +110,7 @@ class Register extends Component {
     } else
     {
       return (
-        <header className='form-container'>
+        <header className='form-container register-screen'>
           <img src={icon} className='main-photo' alt='logo' />
           <p>Sign up!</p>
           <Route exact path='/noctis' component={login} />
