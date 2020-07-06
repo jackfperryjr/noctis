@@ -141,7 +141,7 @@ class Profile extends Component {
           </div>
           <form name='profile-form' id='profile-form' className='profile-form' encType='multipart/form-data' method='put'>
           <p className='font-weight-bold login-username'>{user.userName}</p>
-          <p className='font-small text-secondary'>Joined: {moment(user.joinDate).format('MM/DD/yyyy')}</p>
+          <p className='font-small text-secondary'>Joined {moment(user.joinDate).format('MMMM DD, YYYY')}</p>
           <div className='input-group input-group-override'>
                 <input type='text' className='form-control login-username' defaultValue={user.userName} placeholder='user name' onChange={(e) => this.setState({ username: e.target.value })} />
                 <span>&nbsp;</span>

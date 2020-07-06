@@ -90,6 +90,7 @@ form {
 
 .login-username {
   text-transform: lowercase;
+  margin-bottom: 0;
 }
 
 input[type="text"],
@@ -167,7 +168,7 @@ input[type="number"]:focus  {
   justify-content: center;
   align-items: center;
   border-radius: 50%;
-  border: 2px solid #fff;
+  border: 1px solid #282c34;
   height: calc(10px + 5vmin);
   width: calc(10px + 5vmin);
   font-size: calc(10px + 1.25vmin);
