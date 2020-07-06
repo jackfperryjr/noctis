@@ -160,15 +160,15 @@ input[type="number"]:focus  {
 
 .camera-container {
   position: relative;
-  top: -40px;
+  top: -45px;
   left: 63vw;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 50%;
   border: 2px solid #fff;
-  height: calc(10px + 3vmin);
-  width: calc(10px + 3vmin);
+  height: calc(10px + 5vmin);
+  width: calc(10px + 5vmin);
   font-size: calc(10px + 1.25vmin);
   background-color: #6c757d;
   color: #fff
@@ -176,6 +176,8 @@ input[type="number"]:focus  {
 
 @media (min-width: 768px) {
   .camera-container {
+    height: calc(10px + 3vmin);
+    width: calc(10px + 3vmin);
     top: -55px;
     left: 53vw;
   }
