@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { BrowserRouter as Route, Link, Redirect} from 'react-router-dom'
+import { BrowserRouter as Redirect} from 'react-router-dom'
 import * as moment from 'moment'
 
 class Profile extends Component {
@@ -58,6 +58,7 @@ class Profile extends Component {
   }
 
   handleLogout (e) {
+    document.body.style.background = ''
     document.getElementById('overlay').style.display = 'none'
     localStorage.clear()
     this.props.history.push('/')
@@ -131,27 +132,20 @@ class Profile extends Component {
     if (this.isLoggedIn()) {
       const user = JSON.parse(localStorage.user)
       let userPhoto
-      let userWallpaper
       let portrait = user.photos.filter(function(e){
-        return e.portrait == 1
+        return e.portrait === 1
       })
-      let wallpaper = user.photos.filter(function(e){
-        return e.wallpaper == 1
-      })
+      
       if (portrait.length > 0) {
         userPhoto = portrait[0].url
       } else {
         userPhoto = 'https://rikku.blob.core.windows.net/portrait/00000000-0000-0000-0000-000000000000.png'
       }
-      if (wallpaper.length > 0) {
-        userWallpaper = wallpaper[0].url
-      } else {
-        userWallpaper = 'https://rikku.blob.core.windows.net/wallpaper/00000000-0000-0000-0000-000000000000.png'
-      }
+      
       return (
         <header className='form-container'>
           <div className='profile-container'>
-            <img id='wallpaper-photo' className='wallpaper-photo' src={userWallpaper} alt={user.userName} />
+            {/* <img id='wallpaper-photo' className='wallpaper-photo' src={userWallpaper} alt={user.userName} /> */}
             <img id='profile-photo' className='profile-photo' src={userPhoto} alt={user.userName} onClick={this.handlePhotoUpload}/>
           </div>
           <form name='profile-form' id='profile-form' className='profile-form' encType='multipart/form-data' method='put'>
