@@ -89,7 +89,6 @@ form {
 
 .profile-form {
   margin: 0 auto;
-  width: calc(100% + 10vmin);
   max-width: 500px;
 }
 

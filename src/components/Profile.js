@@ -130,16 +130,24 @@ class Profile extends Component {
   render () {
     if (this.isLoggedIn()) {
       const user = JSON.parse(localStorage.user)
-      var portrait = user.photos.filter(function(e){
+      let userPhoto
+      let userWallpaper
+      let portrait = user.photos.filter(function(e){
         return e.portrait == 1
-      });
-
-      var wallpaper = user.photos.filter(function(e){
+      })
+      let wallpaper = user.photos.filter(function(e){
         return e.wallpaper == 1
-      });
-      
-      let userPhoto = portrait[0].url
-      let userWallpaper = wallpaper[0].url
+      })
+      if (portrait.length > 0) {
+        userPhoto = portrait[0].url
+      } else {
+        userPhoto = 'https://rikku.blob.core.windows.net/portrait/00000000-0000-0000-0000-000000000000.png'
+      }
+      if (wallpaper.length > 0) {
+        userWallpaper = wallpaper[0].url
+      } else {
+        userWallpaper = 'https://rikku.blob.core.windows.net/wallpaper/00000000-0000-0000-0000-000000000000.png'
+      }
       return (
         <header className='form-container'>
           <div className='profile-container'>

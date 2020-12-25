@@ -105,7 +105,7 @@ class Register extends Component {
   }
 
   render () {
-    const icon = require('../icons/chocoboapi-c-2.png')
+    const icon = require('../icons/logo512.png')
     if (this.state.success === true) {
       return <Redirect to="/profile" />
     } else
