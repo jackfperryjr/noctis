@@ -22,30 +22,4 @@
     <div id="overlay"><div class="fa-5x"><i class="fas fa-circle-notch fa-spin" aria-hidden="true"></i></div></div>
     <div id="root"></div>
   </body>
-  <script>
-    window.onhashchange = function() {
-      let user
-      let userWallpaper = 'https://rikku.blob.core.windows.net/wallpaper/00000000-0000-0000-0000-000000000000.png'
-      if (localStorage.user) {
-        user = JSON.parse(localStorage.user)
-        let wallpaper = user.photos.filter(function(e){
-          return e.wallpaper == 1
-        })
-        if (wallpaper.length > 0) {
-          userWallpaper = wallpaper[0].url
-        } 
-      }
-
-      if (window.location.href.indexOf('profile') > -1) {
-        document.body.style.background = 'url(' + userWallpaper + ')'
-        if (window.innerWidth <= 420) {
-          document.body.style.backgroundSize = '100% 250px'
-        } else {
-          document.body.style.backgroundSize = '500px 250px'
-        }
-        document.body.style.backgroundRepeat = 'no-repeat'
-        document.body.style.backgroundPosition = 'center top'
-      }
-    }
-  </script>
 </html>
