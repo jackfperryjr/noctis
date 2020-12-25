@@ -17,8 +17,8 @@ class Login extends Component {
 
   componentDidMount () {
     document.getElementById('overlay').style.display = 'none'
-    if (sessionStorage.token) {
-      let user = JSON.parse(sessionStorage.user);
+    if (localStorage.token) {
+      let user = JSON.parse(localStorage.user);
       this.setState({
         success: true,
         user: user
@@ -45,9 +45,9 @@ class Login extends Component {
       const payload = {
         username: this.state.username,
         password: this.state.password,
-        audience: 'MoogleApi'
+        audience: 'chocoboAPI'
       }
-      fetch('https://chocoboapi.azurewebsites.net/v1/account/login', {
+      fetch('https://chocobo.moogleapi.com/v1/account/login', {
         method: 'post',
         headers: {
           Accept: 'application/json, text/plain, */*',
@@ -56,9 +56,10 @@ class Login extends Component {
         body: JSON.stringify(payload)
       }).then(response => response.json())
         .then(function(response){
-          if (response.token) {
-            sessionStorage.setItem('token', response.token);
-            sessionStorage.setItem('user', JSON.stringify(response.user));
+          if (response.accessToken) {
+            localStorage.setItem('accessToken', response.accessToken);
+            localStorage.setItem('refreshToken', response.refreshToken);
+            localStorage.setItem('user', JSON.stringify(response.user));
             that.setState({
               success: true,
               user: response.user
@@ -76,17 +77,17 @@ class Login extends Component {
   }
 
   render () {
-    const icon = require('../icons/chocoboapi-c-2.png')
+    const icon = require('../icons/moogleapi-icon-512.png')
     if (this.state.success === true) {
-      return <Redirect to="/noctis/profile" />
+      return <Redirect to="/profile" />
     } else
     {
       return (
         <header className='form-container login-screen'>
           <img src={icon} className='main-photo' alt='logo' />
           <p>Enter credentials</p>
-          <Route path='/noctis/login' component={login} />
-          <Route path='/noctis/register' component={register} />
+          <Route path='/login' component={login} />
+          <Route path='/register' component={register} />
           <form>
             <div className='form-group'>
               <input type='text' className='form-control login-username' placeholder='enter username' onChange={(e) => this.setState({ username: e.target.value })} />
@@ -98,7 +99,7 @@ class Login extends Component {
             <div id='validation-error'>enter your credentials</div>
             <button type='submit' className='btn btn-primary btn-block' onClick={(e) => this.handleLogin(e)}>Login</button>
           </form>
-          <p className='font-regular'>Or <Link to='/noctis/register' className='link'>register</Link></p>
+          <p className='font-regular'>Or <Link to='/register' className='link'>register</Link></p>
         </header>
       )
     }

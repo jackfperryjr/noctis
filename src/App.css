@@ -6,11 +6,11 @@
   display: none;
   position: fixed;
   padding-top: 40vh;
-  color: #fff;
+  color: #282c34;
   text-align: center;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0,0,0,0.5);
+  background-color: rgba(255,255,255,0.5);
   cursor: pointer;
   z-index: 1000;
 }
@@ -29,6 +29,7 @@
   justify-items: center;
   align-items: center;
   justify-content: space-around;
+  font-size: 14px;
 }
 
 .btn-profile {
@@ -44,6 +45,7 @@
   border: 2px solid #fff;
   object-fit: cover;
   pointer-events: all;
+  cursor: pointer;
 }
 
 .wallpaper-photo {
@@ -53,6 +55,8 @@
   max-width: 700px;
   height: 250px;
   object-fit: cover;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
 }
 
 #upload-photo,
@@ -64,6 +68,7 @@
   height: calc(100px + 10vmin);
   pointer-events: none;
   margin: 10px;
+  border-radius: 50%;
 }
 
 .dark-nav {
@@ -85,7 +90,7 @@ form {
 .profile-form {
   margin: 0 auto;
   width: calc(100% + 10vmin);
-  max-width: 350px;
+  max-width: 500px;
 }
 
 .login-username {
@@ -106,25 +111,25 @@ input[type="number"]:focus  {
   outline: 0 none;
   border: 1px solid transparent;
   border-bottom: 2px solid #007bff;
-  color: #fff;
+  color: #282c34;
 }
 
 .form-control,
 .form-control:focus,
 .form-control:active {
-  background-color : #282c34; 
+  background-color : #fff; 
 }
 
 .form-container {
   padding-top: 0;
-  background-color: #282c34;
+  background-color: #fff;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: #282c34;
 }
 
 .login-screen,
@@ -172,8 +177,8 @@ input[type="number"]:focus  {
   height: calc(10px + 5vmin);
   width: calc(10px + 5vmin);
   font-size: calc(10px + 1.25vmin);
-  background-color: #6c757d;
-  color: #fff
+  background-color: #fff;
+  color: #282c34
 }
 
 @media (min-width: 768px) {

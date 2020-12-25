@@ -25,7 +25,7 @@ class Profile extends Component {
   }
 
   isLoggedIn () {
-    if (sessionStorage.token && sessionStorage.token !== 'undefined') {
+    if (localStorage.accessToken && localStorage.accessToken !== 'undefined') {
       return true
     } else {
       this.handleLogout()
@@ -59,15 +59,15 @@ class Profile extends Component {
 
   handleLogout (e) {
     document.getElementById('overlay').style.display = 'none'
-    sessionStorage.clear()
-    this.props.history.push('/noctis')
+    localStorage.clear()
+    this.props.history.push('/')
   }
 
   handleUserUpdate (e) {
     e.preventDefault()
     document.getElementById('overlay').style.display = 'block'
-    const token = sessionStorage.token
-    const user = JSON.parse(sessionStorage.user)
+    const accessToken = localStorage.accessToken
+    const user = JSON.parse(localStorage.user)
     if (this.validateForm()) {
       let payload = new FormData()
       payload.append('id', user.id)
@@ -81,17 +81,17 @@ class Profile extends Component {
       payload.append('birthdate', (this.state.birthdate === '') ? user.birthDate : this.state.birthdate)
       payload.append('city', (this.state.city === '') ? user.city : this.state.city)
       payload.append('state', (this.state.state === '') ? user.state : this.state.state)
-      fetch('https://chocoboapi.azurewebsites.net/v1/manage/update', {
+      fetch('https://chocobo.moogleapi.com/v1/manage/update', {
         method: 'put',
         headers: {
-          'Authorization': 'Bearer ' + token
+          'Authorization': 'Bearer ' + accessToken
         },
         body: payload
       }).then(response => response.json())
         .then(function(response) {
           document.getElementById('overlay').style.display = 'none'
           if (response.user) {
-            sessionStorage.setItem('user', JSON.stringify(response.user));
+            localStorage.setItem('user', JSON.stringify(response.user));
           } else {
             console.log('update failed')
             console.log(response.errors)
@@ -129,15 +129,22 @@ class Profile extends Component {
 
   render () {
     if (this.isLoggedIn()) {
-      const user = JSON.parse(sessionStorage.user)
+      const user = JSON.parse(localStorage.user)
+      var portrait = user.photos.filter(function(e){
+        return e.portrait == 1
+      });
+
+      var wallpaper = user.photos.filter(function(e){
+        return e.wallpaper == 1
+      });
+      
+      let userPhoto = portrait[0].url
+      let userWallpaper = wallpaper[0].url
       return (
         <header className='form-container'>
           <div className='profile-container'>
-            <img id='wallpaper-photo' className='wallpaper-photo' src={user.wallpaper} alt={user.userName} />
-            <img id='profile-photo' className='profile-photo' src={user.photo} alt={user.userName} onClick={this.handlePhotoUpload}/>
-            <div className='camera-container'>
-              <i className="fas fa-camera"></i>
-            </div>
+            <img id='wallpaper-photo' className='wallpaper-photo' src={userWallpaper} alt={user.userName} />
+            <img id='profile-photo' className='profile-photo' src={userPhoto} alt={user.userName} onClick={this.handlePhotoUpload}/>
           </div>
           <form name='profile-form' id='profile-form' className='profile-form' encType='multipart/form-data' method='put'>
           <p className='font-weight-bold login-username'>{user.userName}</p>
@@ -165,16 +172,16 @@ class Profile extends Component {
             <div id='validation-error'>form validation failed</div>
             <input id="upload-photo" type="file" accept="image/*" name="photo" ref='photoUploader' onChange={(e) => this.handleProfilePhotoChange(e)} />
             <input id="upload-wallpaper" type="file" accept="image/*" name="wallpaper" />
-            <div className='button-container'>
-              <button type='submit' title='Logout' className='btn btn-secondary btn-profile' onClick={(e) => this.handleLogout(e)}><i className='fas fa-door-closed'></i></button>
-              <button type='submit' title='Update Information' className='btn btn-primary btn-profile' onClick={(e) => this.handleUserUpdate(e)}><i className='fas fa-user-edit'></i></button>
-              <button type='submit' title='Delete Account' className='btn btn-danger btn-profile' onClick={(e) => this.handleUserDelete(e)}><i className='fas fa-user-times'></i></button>
+            <div className='button-container text-muted'>
+              <p type='submit' title='Logout' onClick={(e) => this.handleLogout(e)}>Logout</p>
+              <p type='submit' title='Update Information' onClick={(e) => this.handleUserUpdate(e)}>Update Info</p>
+              <p type='submit' title='Delete Account' className="text-danger" onClick={(e) => this.handleUserDelete(e)}>Delete Account</p>
             </div>
           </form>
         </header>
       )
     } else {
-      return <Redirect to="/noctis" />
+      return <Redirect to="/" />
     }
   }
 }

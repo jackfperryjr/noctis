@@ -73,9 +73,9 @@ class Register extends Component {
         email: this.state.email,
         password: this.state.password,
         confirmpassword: this.state.confirmpassword,
-        audience: 'ChocoboApi'
+        audience: 'chocoboAPI'
       }
-      fetch('https://chocoboapi.azurewebsites.net/v1/account/register', {
+      fetch('https://chocobo.moogleapi.com/v1/account/register', {
         method: 'post',
         headers: {
           Accept: 'application/json, text/plain, */*',
@@ -85,9 +85,10 @@ class Register extends Component {
       }).then(response => response.json())
         .then(function(response){
           document.getElementById('overlay').style.display = 'none'
-          if (response.token) {
-            sessionStorage.setItem('token', response.token);
-            sessionStorage.setItem('user', JSON.stringify(response.user));
+          if (response.accessToken) {
+            localStorage.setItem('accessToken', response.accessToken);
+            localStorage.setItem('refreshToken', response.refreshToken);
+            localStorage.setItem('user', JSON.stringify(response.user));
             that.setState({
               success: true,
               user: response.user
@@ -106,15 +107,15 @@ class Register extends Component {
   render () {
     const icon = require('../icons/chocoboapi-c-2.png')
     if (this.state.success === true) {
-      return <Redirect to="/noctis/profile" />
+      return <Redirect to="/profile" />
     } else
     {
       return (
         <header className='form-container register-screen'>
           <img src={icon} className='main-photo' alt='logo' />
           <p>Sign up!</p>
-          <Route exact path='/noctis' component={login} />
-          <Route path='/noctis/login' component={login} />
+          <Route exact path='/' component={login} />
+          <Route path='/login' component={login} />
           <form>
             <div className='form-group'>
               <input type='text' className='form-control login-username' placeholder='username' onChange={(e) => this.setState({ username: e.target.value })} />
@@ -134,7 +135,7 @@ class Register extends Component {
             <div id='validation-error'>form validation failed</div>
             <button type='submit' className='btn btn-primary btn-block' onClick={(e) => this.handleRegistration(e)}>Register</button>
           </form>
-          <p className='font-regular'>Or <Link to='/noctis/login' className='link'>login</Link></p>
+          <p className='font-regular'>Or <Link to='/login' className='link'>login</Link></p>
         </header>
       )
     }
