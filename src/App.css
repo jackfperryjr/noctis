@@ -36,37 +36,42 @@ body, html {
   font-size: 14px;
 }
 
+.button-container > p {
+  cursor: pointer;
+}
+
 .btn-profile {
   width: 100px;
 }
 
 .profile-photo {
-  position:fixed;
-  top: 70px;
-  left: 32%;
+  position: relative;
+  top: 80px;
+  margin: 0 auto;
   height: calc(150px + 10vmin);
   width: calc(150px + 10vmin);
-  pointer-events: none;
-  /* margin: -170px 10px 10px 10px; */
   border-radius: 50%;
   border: 2px solid #fff;
   object-fit: cover;
   pointer-events: all;
   cursor: pointer;
+  z-index: 2;
 }
 
 .wallpaper-photo {
   position: fixed;
-  top: 0;
+  top: -50px;
   left: 0;
   text-align: center;
-  margin: -50px auto 0 auto;
+  margin: 0 auto;
   width: 100vw;
   max-width: 700px;
   height: 300px;
   object-fit: cover;
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
+  z-index: 1;
+  overflow: visible;
 }
 
 #upload-photo,
@@ -81,17 +86,6 @@ body, html {
   border-radius: 50%;
 }
 
-.dark-nav {
-  width: 100vw;
-  background-color: transparent;
-  color: #61dafb;
-  font-size: calc(10px + 2vmin);
-  font-weight: 500;
-  padding: 10px;
-  position: fixed;
-  top: 0;
-}
-
 form {
   margin: 0 auto;
   text-align: center;
@@ -101,6 +95,7 @@ form {
   margin: 0 auto;
   width: 100vw;
   max-width: 500px;
+  overflow: hidden;
 }
 
 .login-username {
@@ -141,6 +136,7 @@ input[type="number"]:focus  {
   justify-content: flex-start;
   font-size: calc(10px + 2vmin);
   color: #282c34;
+  overflow: hidden;
 }
 
 .login-screen,
@@ -174,22 +170,6 @@ input[type="number"]:focus  {
   margin: 5% auto 15px auto;
   width: 200px;
   max-width: 200px;
-}
-
-.camera-container {
-  position: relative;
-  top: -45px;
-  left: 63vw;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50%;
-  border: 1px solid #282c34;
-  height: calc(10px + 5vmin);
-  width: calc(10px + 5vmin);
-  font-size: calc(10px + 1.25vmin);
-  background-color: #fff;
-  color: #282c34
 }
 
 @media (min-width: 768px) {
