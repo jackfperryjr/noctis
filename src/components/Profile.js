@@ -72,7 +72,7 @@ class Profile extends Component {
     if (this.validateForm()) {
       let payload = new FormData()
       payload.append('id', user.id)
-      payload.append('photo', (this.state.photo === '') ? user.photo : document.forms['profile-form']['upload-photo'].files[0])
+      payload.append('portrait', (this.state.photo === '') ? user.photo : document.forms['profile-form']['upload-photo'].files[0])
       payload.append('wallpaper', (this.state.wallpaper === '') ? user.wallpaper : document.forms['profile-form']['upload-wallpaper'].files[0])
       payload.append('username', (this.state.username === '') ? user.userName : this.state.username)
       payload.append('email', (this.state.email === '') ? user.email : this.state.email)
