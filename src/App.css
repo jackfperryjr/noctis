@@ -3,8 +3,8 @@ body, html {
 }
 
 body {
-  background-size: 100% 250px;
-  background-repeat: no-repeat;
+  margin-top: -50px;
+  overflow: visible hidden;
 }
 
 .app {
@@ -49,7 +49,7 @@ body {
   height: calc(150px + 10vmin);
   width: calc(150px + 10vmin);
   pointer-events: none;
-  margin: 70px 10px 10px 10px;
+  margin: 100px 10px 10px 10px;
   border-radius: 50%;
   border: 2px solid #fff;
   object-fit: cover;
