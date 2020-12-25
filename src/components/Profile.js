@@ -181,9 +181,9 @@ class Profile extends Component {
             <input id="upload-photo" type="file" accept="image/*" name="photo" ref='photoUploader' onChange={(e) => this.handleProfilePhotoChange(e)} />
             <input id="upload-wallpaper" type="file" accept="image/*" name="wallpaper" />
             <div className='button-container text-muted'>
-              <p type='submit' title='Logout' onClick={(e) => this.handleLogout(e)}>Logout</p>
-              <p type='submit' title='Update Information' onClick={(e) => this.handleUserUpdate(e)}>Update Info</p>
-              <p type='submit' title='Delete Account' className="text-danger" onClick={(e) => this.handleUserDelete(e)}>Delete Account</p>
+              <p title='Logout' onClick={(e) => this.handleLogout(e)}>Logout</p>
+              <p title='Update Information' onClick={(e) => this.handleUserUpdate(e)}>Update Info</p>
+              <p title='Delete Account' className="text-danger" onClick={(e) => this.handleUserDelete(e)}>Delete Account</p>
             </div>
           </form>
         </header>
