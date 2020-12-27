@@ -1,30 +1,26 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import { BrowserRouter as Route, Link, Redirect } from 'react-router-dom'
-import login from './Login'
+import { useAuth } from '../context/auth'
+import icon from '../icons/logo512.png'
 
-class Register extends Component {
-  constructor (props) {
-    super(props)
+function Register(props) {
+  const [username, setUsername] = useState('')
+  const [firstname, setFirstname] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [confirmpassword, setConfirmpassword] = useState('')
+  // const [overlay, setOverlay] = useState(false)
+  const { setAuthToken } = useAuth()
 
-    this.state = {
-      username: '',
-      firstname: '',
-      email: '',
-      password: '',
-      confirmpassword: '',
-      success: false
-    }
-  }
-
-  validateForm () {
+ function validateForm() {
     let error = 0
-    if (this.state.username.length < 6) {
+    if (username.length < 6) {
       error = 1
     } 
-    if (this.state.email.length < 6) {
+    if (email.length < 6) {
       error = 1
     } 
-    if (this.state.firstname.length === 0) {
+    if (firstname.length === 0) {
       error = 1
     } 
     // if (this.state.password.length < 6 || this.state.password.length > 12) {
@@ -43,7 +39,7 @@ class Register extends Component {
     }
   }
 
-  handleResponseErrors (error) {
+  function handleResponseErrors(error) {
     let password = error.Password
     let cpassword = error.ConfirmPassword
     let email = error.Email
@@ -62,17 +58,16 @@ class Register extends Component {
     document.getElementById('validation-error').style.display = 'block'
   }
 
-  handleRegistration (e) {
-    const that = this
+  function handleRegistration(e) {
     e.preventDefault()
     document.getElementById('validation-error').style.display = 'none'
-    if (this.validateForm()) {
+    if (validateForm()) {
       const payload = {
-        username: this.state.username,
-        firstname: this.state.firstname,
-        email: this.state.email,
-        password: this.state.password,
-        confirmpassword: this.state.confirmpassword,
+        username: username,
+        firstname: firstname,
+        email: email,
+        password: password,
+        confirmpassword: confirmpassword,
         audience: 'chocoboAPI'
       }
       fetch('https://chocobo.moogleapi.com/v1/account/register', {
@@ -86,17 +81,12 @@ class Register extends Component {
         .then(function(response){
           document.getElementById('overlay').style.display = 'none'
           if (response.accessToken) {
-            localStorage.setItem('accessToken', response.accessToken);
-            localStorage.setItem('refreshToken', response.refreshToken);
-            localStorage.setItem('user', JSON.stringify(response.user));
-            that.setState({
-              success: true,
-              user: response.user
-            })
+            localStorage.setItem('user', JSON.stringify(response.user))
+            setAuthToken(response.accessToken)
           } else {
             console.log('registration failed')
             console.log(response.errors)
-            that.handleResponseErrors(response.errors)
+            handleResponseErrors(response.errors)
           }
         })
     } else {
@@ -104,41 +94,36 @@ class Register extends Component {
     }
   }
 
-  render () {
-    const icon = require('../icons/logo512.png')
-    if (this.state.success === true) {
-      return <Redirect to="/profile" />
-    } else
-    {
-      return (
-        <header className='form-container register-screen'>
-          <img src={icon} className='main-photo' alt='logo' />
-          <p>Sign up!</p>
-          <Route exact path='/' component={login} />
-          <Route path='/login' component={login} />
-          <form>
-            <div className='form-group'>
-              <input type='text' className='form-control login-username' placeholder='username' onChange={(e) => this.setState({ username: e.target.value })} />
-            </div>
-            <div className='form-group'>
-              <input type='text' className='form-control' placeholder='first name' onChange={(e) => this.setState({ firstname: e.target.value })} />
-            </div>
-            <div className='form-group'>
-              <input type='email' className='form-control' placeholder='enter email' onChange={(e) => this.setState({ email: e.target.value })} />
-            </div>
-            <div className='form-group'>
-              <input type='password' className='form-control' placeholder='enter password' onChange={(e) => this.setState({ password: e.target.value })} />
-            </div>
-            <div className='form-group'>
-              <input type='password' className='form-control' placeholder='confirm password' onChange={(e) => this.setState({ confirmpassword: e.target.value })} />
-            </div>
-            <div id='validation-error'>form validation failed</div>
-            <button type='submit' className='btn btn-primary btn-block' onClick={(e) => this.handleRegistration(e)}>Register</button>
-          </form>
-          <p className='font-regular'>Or <Link to='/login' className='link'>login</Link></p>
-        </header>
-      )
-    }
+  if (localStorage.accessToken) {
+    props.history.push('/profile')
+    return <Redirect to='/profile' />
+  } else {
+    return (
+      <header className='form-container register-screen'>
+        <img src={icon} className='main-photo' alt='logo' />
+        <p>Sign up!</p>
+        <form>
+          <div className='form-group'>
+            <input type='text' className='form-control login-username' placeholder='username' onChange={e => { setUsername(e.target.value) }} />
+          </div>
+          <div className='form-group'>
+            <input type='text' className='form-control' placeholder='first name' onChange={e => { setFirstname(e.target.value) }} />
+          </div>
+          <div className='form-group'>
+            <input type='email' className='form-control' placeholder='enter email' onChange={e => { setEmail(e.target.value) }} />
+          </div>
+          <div className='form-group'>
+            <input type='password' className='form-control' placeholder='enter password' onChange={e => { setPassword(e.target.value) }} />
+          </div>
+          <div className='form-group'>
+            <input type='password' className='form-control' placeholder='confirm password' onChange={e => { setConfirmpassword(e.target.value) }} />
+          </div>
+          <div id='validation-error'>form validation failed</div>
+          <button type='submit' className='btn btn-primary btn-block' onClick={(e) => handleRegistration(e)}>Register</button>
+        </form>
+        <p className='font-regular mt-3'>Or <Link to='/login' className='link'>login</Link></p>
+      </header>
+    )
   }
 }
 

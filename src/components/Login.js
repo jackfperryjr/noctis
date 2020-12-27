@@ -1,33 +1,16 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import { BrowserRouter as Route, Link, Redirect} from 'react-router-dom'
-import register from './Register'
-import login from './Login'
+import { useAuth } from '../context/auth'
+import icon from '../icons/logo512.png'
 
-class Login extends Component {
-  constructor (props) {
-    super(props)
+function Login(props) {
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+  // const [overlay, setOverlay] = useState(false)
+  const { setAuthToken } = useAuth()
 
-    this.state = {
-      username: '',
-      password: '',
-      user: {},
-      success: false
-    }
-  }
-
-  componentDidMount () {
-    document.getElementById('overlay').style.display = 'none'
-    if (localStorage.token) {
-      let user = JSON.parse(localStorage.user);
-      this.setState({
-        success: true,
-        user: user
-      })
-    }
-  }
-
-  validateForm () {
-    if (this.state.username.length > 0 && this.state.username.length > 0) {
+  function validateForm() {
+    if (username.length > 0 && username.length > 0) {
       return true
     } else {
       document.getElementById('validation-error').style.display = 'block'
@@ -35,16 +18,15 @@ class Login extends Component {
     }
   }
 
-  handleLogin (e) {
+  function handleLogin(e) {
     e.preventDefault()
     document.getElementById('login-error').style.display = 'none'
     document.getElementById('validation-error').style.display = 'none'
-    if (this.validateForm()) {
-      const that = this
+    if (validateForm()) {
       document.getElementById('overlay').style.display = 'block'
       const payload = {
-        username: this.state.username,
-        password: this.state.password,
+        username: username,
+        password: password,
         audience: 'chocoboAPI'
       }
       fetch('https://chocobo.moogleapi.com/v1/account/login', {
@@ -57,13 +39,8 @@ class Login extends Component {
       }).then(response => response.json())
         .then(function(response){
           if (response.accessToken) {
-            localStorage.setItem('accessToken', response.accessToken);
-            localStorage.setItem('refreshToken', response.refreshToken);
-            localStorage.setItem('user', JSON.stringify(response.user));
-            that.setState({
-              success: true,
-              user: response.user
-            })
+            localStorage.setItem('user', JSON.stringify(response.user))
+            setAuthToken(response.accessToken)
           } else {
             console.log('failed login')
             console.log(response.message)
@@ -75,34 +52,28 @@ class Login extends Component {
         console.log('validation failed')
       }
   }
-
-  render () {
-    const icon = require('../icons/logo512.png')
-    if (this.state.success === true) {
-      return <Redirect to="/profile" />
-    } else
-    {
-      return (
-        <header className='form-container login-screen'>
-          <img src={icon} className='main-photo' alt='logo' />
-          <p>Enter credentials</p>
-          <Route path='/login' component={login} />
-          <Route path='/register' component={register} />
-          <form>
-            <div className='form-group'>
-              <input type='text' className='form-control login-username' placeholder='enter username' onChange={(e) => this.setState({ username: e.target.value })} />
-            </div>
-            <div className='form-group'>
-              <input type='password' className='form-control' placeholder='enter password' onChange={(e) => this.setState({ password: e.target.value })} />
-            </div>
-            <div id='login-error'>invalid credentials</div>
-            <div id='validation-error'>enter your credentials</div>
-            <button type='submit' className='btn btn-primary btn-block' onClick={(e) => this.handleLogin(e)}>Login</button>
-          </form>
-          <p className='font-regular'>Or <Link to='/register' className='link'>register</Link></p>
-        </header>
-      )
-    }
+  if (localStorage.accessToken) {
+    props.history.push('/profile')
+    return <Redirect to='/profile' />
+  } else {
+    return (
+      <header className='form-container login-screen'>
+        <img src={icon} className='main-photo' alt='logo' />
+        <p>Noctis</p>
+        <form>
+          <div className='form-group'>
+            <input type='text' className='form-control login-username' placeholder='enter username' value={username} onChange={e => { setUsername(e.target.value) }} />
+          </div>
+          <div className='form-group'>
+            <input type='password' className='form-control' placeholder='enter password' value={password} onChange={e => { setPassword(e.target.value) }} />
+          </div>
+          <div id='login-error'>invalid credentials</div>
+          <div id='validation-error'>enter your credentials</div>
+          <button type='submit' className='btn btn-primary btn-block' onClick={(e) => handleLogin(e)}>Login</button>
+        </form>
+        <p className='font-regular mt-3'>Or <Link to='/register' className='link'>register</Link></p>
+      </header>
+    )
   }
 }
 
