@@ -82,8 +82,8 @@ body, html {
   width: 100vw;
   max-width: 700px;
   height: 300px;
-  border-bottom-left-radius: 15px;
-  border-bottom-right-radius: 15px;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
   z-index: 1;
   overflow: hidden;
 }
