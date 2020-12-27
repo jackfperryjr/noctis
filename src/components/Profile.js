@@ -11,7 +11,7 @@ function Profile(props) {
   const [city, setCity] = useState('')
   const [state, setState] = useState('')
   const [photo, setPhoto] = useState('')
-  // const [wallpaper, setWallpaper] = useState('')
+  const [wallpaper, setWallpaper] = useState('')
   const [email, setEmail] = useState('')
   // const [password, setPassword] = useState('')
   // const [confirmpassword, setConfirmpassword] = useState('')
@@ -80,7 +80,7 @@ function Profile(props) {
       let payload = new FormData()
       payload.append('id', user.id)
       payload.append('portrait', (photo === '') ? user.photo : document.forms['profile-form']['upload-photo'].files[0])
-      // payload.append('wallpaper', (wallpaper === '') ? user.wallpaper : document.forms['profile-form']['upload-wallpaper'].files[0])
+      payload.append('wallpaper', (wallpaper === '') ? user.wallpaper : document.forms['profile-form']['upload-wallpaper'].files[0])
       payload.append('username', (username === '') ? user.userName : username)
       payload.append('email', (email === '') ? user.email : email)
       payload.append('firstname', (firstname === '') ? user.firstName : firstname)
@@ -131,15 +131,27 @@ function Profile(props) {
     }
   }
 
-  function handlePhotoUpload() {
+  function handleUserPhotoUpload() {
     document.getElementById('upload-photo').click()
   }
 
-  function handleProfilePhotoChange(e) {
+  function handlePhotoChange(e) {
     let img = URL.createObjectURL(e.target.files[0]);
     if (img) {
       document.getElementById('profile-photo').style.backgroundImage = 'url('+img+')'
       setPhoto(e.target.value)
+    }
+  }
+
+  function handleUserWallpaperUpload() {
+    document.getElementById('upload-wallpaper').click()
+  }
+
+  function handleWallpaperChange(e) {
+    let img = URL.createObjectURL(e.target.files[0]);
+    if (img) {
+      document.getElementById('wallpaper-photo').style.backgroundImage = 'url('+img+')'
+      setWallpaper(e.target.value)
     }
   }
 
@@ -150,9 +162,11 @@ function Profile(props) {
     return (
       <div className='form-container form-container-profile component'>
       <div className='profile-container'>
-        <img id='wallpaper-photo' className='wallpaper-photo' src={userWallpaper} alt={user.userName} />
-        <div id='profile-photo' className='profile-photo' style={{ backgroundImage: 'url('+userPhoto+')' }} onClick={handlePhotoUpload}>
-          <p>Edit</p>
+        <div id='wallpaper-photo' className='wallpaper-photo' style={{ backgroundImage: 'url('+userWallpaper+')' }} onClick={handleUserWallpaperUpload}>
+        <span><i className="fas fa-camera"></i></span>
+        </div>
+        <div id='profile-photo' className='profile-photo' style={{ backgroundImage: 'url('+userPhoto+')' }} onClick={handleUserPhotoUpload}>
+          <span><i className="fas fa-camera"></i></span>
         </div>
       </div>
       <form name='profile-form' id='profile-form' className='profile-form' encType='multipart/form-data' method='put'>
@@ -183,7 +197,8 @@ function Profile(props) {
             <input type='text' className='form-control' defaultValue={user.state} placeholder='state' onChange={e => { setState(e.target.value) }} />
         </div>
         <div id='validation-error'>form validation failed</div>
-        <input id="upload-photo" type="file" accept="image/*" name="photo" onChange={e => { handleProfilePhotoChange(e) }} />
+        <input id="upload-photo" type="file" accept="image/*" name="photo" onChange={e => { handlePhotoChange(e) }} />
+        <input id="upload-wallpaper" type="file" accept="image/*" name="wallpaper" onChange={e => { handleWallpaperChange(e) }} />
         <div className='button-container text-muted'>
           <p title='Logout' onClick={handleLogout}>Logout</p>
           <p title='Update Information' onClick={e => { handleUserUpdate(e) }}>Update Info</p>
@@ -191,44 +206,6 @@ function Profile(props) {
         </div>
       </form>
     </div>
-      // <div className='form-container'>
-      //   <div className='profile-container'>
-      //     <img id='wallpaper-photo' className='wallpaper-photo' src={userWallpaper} alt={user.userName} />
-      //     <img id='profile-photo' className='profile-photo' src={userPhoto} alt={user.userName} onClick={handlePhotoUpload}/>
-      //   </div>
-      //   <form name='profile-form' id='profile-form' className='profile-form' encType='multipart/form-data' method='put'>
-      //   <p className='font-weight-bold login-username'>{user.userName}</p>
-      //   <p className='font-small text-secondary'>Joined {moment(user.joinDate).format('MMMM DD, YYYY')}</p>
-      //   <div className='input-group input-group-override'>
-      //         <input type='text' className='form-control login-username' defaultValue={user.userName} placeholder='username' onChange={e => { setUsername(e.target.value) }} />
-      //         <span>&nbsp;</span>
-      //         <input type='text' className='form-control' defaultValue={user.email} placeholder='email' onChange={e => { setEmail(e.target.value) }} />
-      //     </div>
-      //     <div className='input-group'>
-      //         <input type='text' className='form-control' defaultValue={user.firstName} placeholder='first name' onChange={e => { setFirstname(e.target.value) }} />
-      //         <span>&nbsp;</span>
-      //         <input type='text' className='form-control' defaultValue={user.lastName} placeholder='last name' onChange={e => { setLastname(e.target.value) }} />
-      //     </div>
-      //     <div className='input-group'>
-      //         <input type='number' className='form-control' defaultValue={user.age} placeholder='00' onChange={e => { setAge(e.target.value) }} />
-      //         <span>&nbsp;</span>
-      //         <input type='date' className='form-control' defaultValue={moment(user.birthDate).format('YYYY-MM-DD')} onChange={e => { setBirthdate(e.target.value) }} />
-      //     </div>
-      //     <div className='input-group'>
-      //         <input type='text' className='form-control' defaultValue={user.city} placeholder='city' onChange={e => { setCity(e.target.value) }} />
-      //         <span>&nbsp;</span>
-      //         <input type='text' className='form-control' defaultValue={user.state} placeholder='state' onChange={e => { setState(e.target.value) }} />
-      //     </div>
-      //     <div id='validation-error'>form validation failed</div>
-      //     <input id="upload-photo" type="file" accept="image/*" name="photo" ref='photoUploader' onChange={e => { handleProfilePhotoChange(e) }} />
-      //     <input id="upload-wallpaper" type="file" accept="image/*" name="wallpaper" />
-      //     <div className='button-container text-muted'>
-      //       <p title='Logout' onClick={handleLogout}>Logout</p>
-      //       <p title='Update Information' onClick={e => { handleUserUpdate(e) }}>Update Info</p>
-      //       <p title='Delete Account' className="text-danger" onClick={handleUserDelete}>Delete Account</p>
-      //     </div>
-      //   </form>
-      // </div>
     )
   }
 }

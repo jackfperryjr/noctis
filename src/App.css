@@ -38,6 +38,7 @@ body, html {
 
 .button-container > p {
   cursor: pointer;
+  margin: 0;
 }
 
 .btn-profile {
@@ -46,7 +47,7 @@ body, html {
 
 .profile-photo {
   position: relative;
-  top: 80px;
+  top: -200px;
   display: flex;
   align-items: flex-end;
   justify-content: center;
@@ -57,39 +58,55 @@ body, html {
   overflow: hidden;
   border-radius: 50%;
   border: 2px solid #fff;
+  background-color: #fff;
   object-fit: cover;
   pointer-events: all;
   cursor: pointer;
   z-index: 2;
 }
 
-.profile-photo > p {
+.profile-photo > span {
   width: 100%;
   font-size: 14px;
-  padding: 3px;
+  padding: 4px 8px;
   text-align: center;
   margin: 0;
-  color: #fff;
+  color: rgba(255,255,255,0.7);
   background-color: rgba(0,0,0,.2);
 }
 
 .wallpaper-photo {
-  position: fixed;
+  position: relative;
   top: -50px;
   left: 0;
+  background-size: cover;
   text-align: center;
   margin: 0 auto;
   width: 100vw;
   max-width: 700px;
-  height: 300px;
+  height: 280px;
   border-bottom-left-radius: 0px;
   border-bottom-right-radius: 0px;
   z-index: 1;
   overflow: hidden;
 }
 
+.wallpaper-photo > span {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  color: rgba(255,255,255,0.7);
+  padding: 6px 10px;
+  font-size: 16px;
+  background-color: rgba(0,0,0,.2);
+  border-radius: 6px;
+  cursor: pointer;
+}
+
 #upload-photo,
 #upload-wallpaper {
+  display: block;
+  line-height: 8px;
   opacity: 0;
 }
 
@@ -110,6 +127,7 @@ form {
   width: 100vw;
   max-width: 500px;
   overflow: hidden;
+  z-index: 2;
 }
 
 .login-username {
@@ -203,9 +221,9 @@ input[type="number"]:focus  {
 
   .profile-photo {
     position: relative;
+    top: 80px;
     height: calc(150px + 10vmin);
     width: calc(150px + 10vmin);
-    pointer-events: none;
     margin: -300px 10px 10px 10px;
     border-radius: 50%;
     border: 2px solid #fff;
