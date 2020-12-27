@@ -74,7 +74,7 @@ function Profile(props) {
   function handleUserUpdate(e) {
     e.preventDefault()
     document.getElementById('overlay').style.display = 'block'
-    const accessToken = localStorage.accessToken
+    const accessToken = JSON.parse(localStorage.accessToken)
     const user = JSON.parse(localStorage.user)
     if (validateForm()) {
       let payload = new FormData()
@@ -144,7 +144,9 @@ function Profile(props) {
       <div className='form-container form-container-profile component'>
       <div className='profile-container'>
         <img id='wallpaper-photo' className='wallpaper-photo' src={userWallpaper} alt={user.userName} />
-        <img id='profile-photo' className='profile-photo' src={userPhoto} alt={user.userName} onClick={handlePhotoUpload}/>
+        <div id='profile-photo' className='profile-photo' style={{ backgroundImage: 'url('+userPhoto+')' }} onClick={handlePhotoUpload}>
+          <p>Edit</p>
+        </div>
       </div>
       <form name='profile-form' id='profile-form' className='profile-form' encType='multipart/form-data' method='put'>
         <p className='font-weight-bold login-username'>{user.userName}</p>
