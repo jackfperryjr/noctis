@@ -95,17 +95,24 @@ function Profile(props) {
           'Authorization': 'Bearer ' + accessToken
         },
         body: payload
-      }).then(response => response.json())
-        .then(function(response) {
-          document.getElementById('overlay').style.display = 'none'
-          if (response.user) {
-            localStorage.setItem('user', JSON.stringify(response.user))
-            // TODO: Present notification to user of data update.
-          } else {
-            console.log('update failed')
-            console.log(response.errors)
-          }
-        })
+      }).then(function(response) {
+        if (response.status === 200) {
+          return response.json().then((data) => {
+            document.getElementById('overlay').style.display = 'none'
+            if (data.user) {
+              localStorage.setItem('user', JSON.stringify(data.user))
+              // TODO: Present notification to user of data update.
+            } else {
+              console.log('update failed')
+              console.log(response.errors)
+            }
+          })
+        } else {
+          console.log('Probably an invalid token. Log in again.')
+          localStorage.clear()
+          return <Redirect to='/' />
+        }
+      })
     } else {
       console.log('validation failed')
     }
@@ -131,7 +138,7 @@ function Profile(props) {
   function handleProfilePhotoChange(e) {
     let img = URL.createObjectURL(e.target.files[0]);
     if (img) {
-      document.getElementById('profile-photo').src = img
+      document.getElementById('profile-photo').style.backgroundImage = 'url('+img+')'
       setPhoto(e.target.value)
     }
   }
