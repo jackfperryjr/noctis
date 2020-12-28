@@ -14,7 +14,7 @@ function Register(props) {
 
  function validateForm() {
     let error = 0
-    if (username.length < 6) {
+    if (username.length < 4) {
       error = 1
     } 
     if (email.length < 6) {
