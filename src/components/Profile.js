@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { BrowserRouter as Redirect} from 'react-router-dom'
 import moment from 'moment'
+import { refresh } from '../utility'
 
 function Profile(props) {
   const [username, setUsername] = useState('')
@@ -72,9 +73,9 @@ function Profile(props) {
   }
 
   function handleUserUpdate(e) {
+    refresh(JSON.parse(localStorage.accessToken))
     e.preventDefault()
     document.getElementById('overlay').style.display = 'block'
-    const accessToken = JSON.parse(localStorage.accessToken)
     const user = JSON.parse(localStorage.user)
     if (validateForm()) {
       let payload = new FormData()
@@ -92,13 +93,14 @@ function Profile(props) {
       fetch('https://chocobo.moogleapi.com/v1/manage/update', {
         method: 'put',
         headers: {
-          'Authorization': 'Bearer ' + accessToken
+          'Authorization': 'Bearer ' + JSON.parse(localStorage.accessToken)
         },
         body: payload
       }).then(function(response) {
         if (response.status === 200) {
           return response.json().then((data) => {
             document.getElementById('overlay').style.display = 'none'
+            document.getElementById('update-notification').style.display = 'block'
             if (data.user) {
               localStorage.setItem('user', JSON.stringify(data.user))
               // TODO: Present notification to user of data update.
@@ -155,6 +157,10 @@ function Profile(props) {
     }
   }
 
+  function dismiss() {
+    document.getElementById('update-notification').style.display = 'none'
+  }
+
   if (!localStorage.accessToken) {
     props.history.push('/')
     return <Redirect to='/' />
@@ -172,6 +178,12 @@ function Profile(props) {
       <form name='profile-form' id='profile-form' className='profile-form' encType='multipart/form-data' method='put'>
         <p className='font-weight-bold login-username'>{user.userName}</p>
         <p className='font-small text-secondary'>Joined {moment(user.joinDate).format('MMMM DD, YYYY')}</p>
+        <div id='update-notification' className='alert alert-success alert-dismissible text-center fade show small' role='alert' style={{ display: 'none' }}>
+          <span>User information updated!</span>
+          <button type="button" className="close" data-dismiss="alert" aria-label="Close" onClick={dismiss}>
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
         <div className='input-group mb-2'>
             <input type='text' className='form-control login-username' defaultValue={user.userName} placeholder='user name' onChange={e => { setUsername(e.target.value) }} />
             </div>

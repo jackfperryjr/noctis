@@ -40,6 +40,7 @@ function Login(props) {
         .then(function(response){
           if (response.accessToken) {
             localStorage.setItem('user', JSON.stringify(response.user))
+            localStorage.setItem('refreshToken', JSON.stringify(response.refreshToken))
             setAuthToken(response.accessToken)
           } else {
             console.log('failed login')

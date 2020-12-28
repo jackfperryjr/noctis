@@ -110,6 +110,7 @@ body, html {
   display: block;
   line-height: 8px;
   opacity: 0;
+  pointer-events: none;
 }
 
 .main-photo {

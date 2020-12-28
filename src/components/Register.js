@@ -82,6 +82,7 @@ function Register(props) {
           document.getElementById('overlay').style.display = 'none'
           if (response.accessToken) {
             localStorage.setItem('user', JSON.stringify(response.user))
+            localStorage.setItem('refreshToken', JSON.stringify(response.refreshToken))
             setAuthToken(response.accessToken)
           } else {
             console.log('registration failed')
