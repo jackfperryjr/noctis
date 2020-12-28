@@ -100,10 +100,9 @@ function Profile(props) {
         if (response.status === 200) {
           return response.json().then((data) => {
             document.getElementById('overlay').style.display = 'none'
-            document.getElementById('update-notification').style.display = 'block'
             if (data.user) {
               localStorage.setItem('user', JSON.stringify(data.user))
-              // TODO: Present notification to user of data update.
+              document.getElementById('update-notification').style.display = 'block'
             } else {
               console.log('update failed')
               console.log(response.errors)
