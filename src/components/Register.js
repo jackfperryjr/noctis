@@ -62,6 +62,7 @@ function Register(props) {
     e.preventDefault()
     document.getElementById('validation-error').style.display = 'none'
     if (validateForm()) {
+      document.getElementById('overlay').style.display = 'block'
       const payload = {
         username: username,
         firstname: firstname,

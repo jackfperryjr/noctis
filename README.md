@@ -55,7 +55,7 @@ function handleLogin() {
 ### Login and Register responses contain:
 
 - User object (containing typical Identity properties as well as some additional)
- * Example (without user ID or tokens):  
+    - Example (without user ID or tokens):  
  
  ```json
 {
@@ -99,3 +99,5 @@ function handleLogin() {
  ```
 - Access Token
 - Refresh Token 
+- Access Token expiration
+- Message
