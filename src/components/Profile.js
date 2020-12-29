@@ -17,11 +17,17 @@ function Profile(props) {
   // const [password, setPassword] = useState('')
   // const [confirmpassword, setConfirmpassword] = useState('')
   // const [overlay, setOverlay] = useState(false)
-  const user = JSON.parse(localStorage.user)
-  document.getElementById('overlay').style.display = 'none'
-
+  let user
   let userPhoto
   let userWallpaper
+
+  if (!localStorage.user || !localStorage.accessToken) {
+    props.history.push('/login')
+    return <Redirect to='/login' />
+  } else {
+    user = JSON.parse(localStorage.user)
+  }
+
   let portraits = user.photos.filter(function(e){
     return e.portrait === 1
   })
@@ -40,6 +46,8 @@ function Profile(props) {
   } else {
     userPhoto = 'https://rikku.blob.core.windows.net/portrait/00000000-0000-0000-0000-000000000000.png'
   }
+
+  document.getElementById('overlay').style.display = 'none'
 
   function handleUserDelete(e) {
     document.getElementById('overlay').style.display = 'none'
@@ -66,10 +74,10 @@ function Profile(props) {
   //   document.getElementById('validation-error').style.display = 'block'
   // }
 
-  function handleLogout(e) {
-    document.getElementById('overlay').style.display = 'none'
+  function handleLogout() {
     localStorage.clear()
     props.history.push('/')
+    return <Redirect to='/' />
   }
 
   function handleUserUpdate(e) {
@@ -160,65 +168,60 @@ function Profile(props) {
     document.getElementById('update-notification').style.display = 'none'
   }
 
-  if (!localStorage.accessToken) {
-    props.history.push('/')
-    return <Redirect to='/' />
-  } else {
-    return (
-      <div className='form-container form-container-profile component'>
-      <div className='profile-container'>
-        <div id='wallpaper-photo' className='wallpaper-photo' style={{ backgroundImage: 'url('+userWallpaper+')' }} onClick={handleUserWallpaperUpload}>
-        <span><i className="fas fa-camera"></i></span>
-        </div>
-        <div id='profile-photo' className='profile-photo' style={{ backgroundImage: 'url('+userPhoto+')' }} onClick={handleUserPhotoUpload}>
-          <span><i className="fas fa-camera"></i></span>
-        </div>
+  return (
+    <div className='form-container form-container-profile component'>
+    <div className='profile-container'>
+      <div id='wallpaper-photo' className='wallpaper-photo' style={{ backgroundImage: 'url('+userWallpaper+')' }} onClick={handleUserWallpaperUpload}>
+      <span><i className="fas fa-camera"></i></span>
       </div>
-      <form name='profile-form' id='profile-form' className='profile-form' encType='multipart/form-data' method='put'>
-        <p className='font-weight-bold login-username'>{user.userName}</p>
-        <p className='font-small text-secondary'>Joined {moment(user.joinDate).format('MMMM DD, YYYY')}</p>
-        <div id='update-notification' className='alert alert-success alert-dismissible text-center fade show small' role='alert' style={{ display: 'none' }}>
-          <span>User information updated!</span>
-          <button type="button" className="close" data-dismiss="alert" aria-label="Close" onClick={dismiss}>
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div className='input-group mb-2'>
-            <input type='text' className='form-control login-username' defaultValue={user.userName} placeholder='user name' onChange={e => { setUsername(e.target.value) }} />
-            </div>
-        <div className='input-group mb-2'>
-            <input type='text' className='form-control' defaultValue={user.email} placeholder='email' onChange={e => { setEmail(e.target.value) }} />
-        </div>
-        <div className='input-group mb-2'>
-            <input type='text' className='form-control' defaultValue={user.firstName} placeholder='first name' onChange={e => { setFirstname(e.target.value) }} />
-            </div>
-        <div className='input-group mb-2'>
-            <input type='text' className='form-control' defaultValue={user.lastName} placeholder='last name'  onChange={e => { setLastname(e.target.value) }} />
-        </div>
-        <div className='input-group mb-2'>
-            <input type='number' className='form-control' defaultValue={user.age} placeholder='00' onChange={e => { setAge(e.target.value) }} />
-            </div>
-        <div className='input-group mb-2'>
-            <input type='date' className='form-control' defaultValue={moment(user.birthDate).format('YYYY-MM-DD')}  onChange={e => { setBirthdate(e.target.value) }} />
-        </div>
-        <div className='input-group mb-2'>
-            <input type='text' className='form-control' defaultValue={user.city} placeholder='city' onChange={e => { setCity(e.target.value) }} />
-            </div>
-        <div className='input-group mb-2'>
-            <input type='text' className='form-control' defaultValue={user.state} placeholder='state' onChange={e => { setState(e.target.value) }} />
-        </div>
-        <div id='validation-error'>form validation failed</div>
-        <input id="upload-photo" type="file" accept="image/*" name="photo" onChange={e => { handlePhotoChange(e) }} />
-        <input id="upload-wallpaper" type="file" accept="image/*" name="wallpaper" onChange={e => { handleWallpaperChange(e) }} />
-        <div className='button-container text-muted'>
-          <p title='Logout' onClick={handleLogout}>Logout</p>
-          <p title='Update Information' onClick={e => { handleUserUpdate(e) }}>Update Info</p>
-          <p title='Delete Account' className="text-danger" onClick={handleUserDelete}>Delete Account</p>
-        </div>
-      </form>
+      <div id='profile-photo' className='profile-photo' style={{ backgroundImage: 'url('+userPhoto+')' }} onClick={handleUserPhotoUpload}>
+        <span><i className="fas fa-camera"></i></span>
+      </div>
     </div>
-    )
-  }
+    <form name='profile-form' id='profile-form' className='profile-form' encType='multipart/form-data' method='put'>
+      <p className='font-weight-bold login-username'>{user.userName}</p>
+      <p className='font-small text-secondary'>Joined {moment(user.joinDate).format('MMMM DD, YYYY')}</p>
+      <div id='update-notification' className='alert alert-success alert-dismissible text-center fade show small' role='alert' style={{ display: 'none' }}>
+        <span>User information updated!</span>
+        <button type="button" className="close" data-dismiss="alert" aria-label="Close" onClick={dismiss}>
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div className='input-group mb-2'>
+          <input type='text' className='form-control login-username' defaultValue={user.userName} placeholder='user name' onChange={e => { setUsername(e.target.value) }} />
+          </div>
+      <div className='input-group mb-2'>
+          <input type='text' className='form-control' defaultValue={user.email} placeholder='email' onChange={e => { setEmail(e.target.value) }} />
+      </div>
+      <div className='input-group mb-2'>
+          <input type='text' className='form-control' defaultValue={user.firstName} placeholder='first name' onChange={e => { setFirstname(e.target.value) }} />
+          </div>
+      <div className='input-group mb-2'>
+          <input type='text' className='form-control' defaultValue={user.lastName} placeholder='last name'  onChange={e => { setLastname(e.target.value) }} />
+      </div>
+      <div className='input-group mb-2'>
+          <input type='number' className='form-control' defaultValue={user.age} placeholder='00' onChange={e => { setAge(e.target.value) }} />
+          </div>
+      <div className='input-group mb-2'>
+          <input type='date' className='form-control' defaultValue={moment(user.birthDate).format('YYYY-MM-DD')}  onChange={e => { setBirthdate(e.target.value) }} />
+      </div>
+      <div className='input-group mb-2'>
+          <input type='text' className='form-control' defaultValue={user.city} placeholder='city' onChange={e => { setCity(e.target.value) }} />
+          </div>
+      <div className='input-group mb-2'>
+          <input type='text' className='form-control' defaultValue={user.state} placeholder='state' onChange={e => { setState(e.target.value) }} />
+      </div>
+      <div id='validation-error'>form validation failed</div>
+      <input id="upload-photo" type="file" accept="image/*" name="photo" onChange={e => { handlePhotoChange(e) }} />
+      <input id="upload-wallpaper" type="file" accept="image/*" name="wallpaper" onChange={e => { handleWallpaperChange(e) }} />
+      <div className='button-container text-muted'>
+        <p title='Logout' onClick={handleLogout}>Logout</p>
+        <p title='Update Information' onClick={e => { handleUserUpdate(e) }}>Update Info</p>
+        <p title='Delete Account' className="text-danger" onClick={handleUserDelete}>Delete Account</p>
+      </div>
+    </form>
+  </div>
+  )
 }
 
 export default Profile
