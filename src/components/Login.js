@@ -63,10 +63,10 @@ function Login(props) {
         <p>Noctis</p>
         <form>
           <div className='form-group'>
-            <input type='text' className='form-control login-username' placeholder='enter username' value={username} onChange={e => { setUsername(e.target.value) }} />
+            <input type='text' className='form-control login-username' placeholder='Enter username' value={username} onChange={e => { setUsername(e.target.value) }} />
           </div>
           <div className='form-group'>
-            <input type='password' className='form-control' placeholder='enter password' value={password} onChange={e => { setPassword(e.target.value) }} />
+            <input type='password' className='form-control' placeholder='Enter password' value={password} onChange={e => { setPassword(e.target.value) }} />
           </div>
           <div id='login-error'>invalid credentials</div>
           <div id='validation-error'>enter your credentials</div>
