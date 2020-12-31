@@ -5,7 +5,7 @@ import icon from '../icons/logo512.png'
 
 function Register(props) {
   const [username, setUsername] = useState('')
-  const [firstname, setFirstname] = useState('')
+  const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [confirmpassword, setConfirmpassword] = useState('')
@@ -20,7 +20,7 @@ function Register(props) {
     if (email.length < 6) {
       error = 1
     } 
-    if (firstname.length === 0) {
+    if (name.length === 0) {
       error = 1
     } 
     // if (this.state.password.length < 6 || this.state.password.length > 12) {
@@ -64,8 +64,8 @@ function Register(props) {
     if (validateForm()) {
       document.getElementById('overlay').style.display = 'block'
       const payload = {
-        username: username,
-        firstname: firstname,
+        username: username.toLowerCase(),
+        name: name,
         email: email,
         password: password,
         confirmpassword: confirmpassword,
@@ -106,19 +106,19 @@ function Register(props) {
         <p>Sign up!</p>
         <form>
           <div className='form-group'>
-            <input type='text' className='form-control login-username' placeholder='username' onChange={e => { setUsername(e.target.value) }} />
+            <input type='text' className='form-control' placeholder='Enter username' onChange={e => { setUsername(e.target.value) }} />
           </div>
           <div className='form-group'>
-            <input type='text' className='form-control' placeholder='first name' onChange={e => { setFirstname(e.target.value) }} />
+            <input type='text' className='form-control' placeholder='Enter name' onChange={e => { setName(e.target.value) }} />
           </div>
           <div className='form-group'>
-            <input type='email' className='form-control' placeholder='enter email' onChange={e => { setEmail(e.target.value) }} />
+            <input type='email' className='form-control' placeholder='Enter email' onChange={e => { setEmail(e.target.value) }} />
           </div>
           <div className='form-group'>
-            <input type='password' className='form-control' placeholder='enter password' onChange={e => { setPassword(e.target.value) }} />
+            <input type='password' className='form-control' placeholder='Enter password' onChange={e => { setPassword(e.target.value) }} />
           </div>
           <div className='form-group'>
-            <input type='password' className='form-control' placeholder='confirm password' onChange={e => { setConfirmpassword(e.target.value) }} />
+            <input type='password' className='form-control' placeholder='Confirm password' onChange={e => { setConfirmpassword(e.target.value) }} />
           </div>
           <div id='validation-error'>form validation failed</div>
           <button type='submit' className='btn btn-primary btn-block' onClick={(e) => handleRegistration(e)}>Register</button>
