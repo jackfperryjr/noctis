@@ -157,13 +157,18 @@ input[type="date"]:focus,
 input[type="number"]:focus {
   outline: 0 none;
   border: 1px solid transparent;
-  border-bottom: 1px solid #6c757d;
+  /* border-bottom: 1px solid #6c757d; */
   color: #282c34;
   background-color: transparent!important;
 }
 
 textarea {
   background-color: transparent!important;
+  border: 1px solid transparent!important;
+  border-radius: 5px;
+  height: 200px!important;
+  resize: none;
+  outline: 0 none;
 }
 
 .form-control,
@@ -186,6 +191,14 @@ textarea {
   font-size: calc(10px + 2vmin);
   color: #282c34;
   overflow: hidden;
+}
+
+.fa-pencil-alt {
+  font-size: 14px;
+  position: absolute;
+  right: 12px;
+  top: 12px;
+  cursor: default;
 }
 
 .login-screen,

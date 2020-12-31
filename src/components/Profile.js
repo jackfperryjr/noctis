@@ -157,32 +157,33 @@ function Profile(props) {
         </button>
       </div>
       {/* <div className='input-group mb-2 row'>
-        <label class="col-2 col-form-label px14 text-left font-weight-bold mr-3">Username</label>
-        <input type='text' className='form-control login-username col-10' defaultValue={user.userName} placeholder='Enter username' onChange={e => { setUsername(e.target.value) }} />
+        <label class="col-3 col-form-label px14 text-left font-weight-bold ">Username</label>
+        <input type='text' className='form-control login-username col-9' defaultValue={user.userName} placeholder='Enter username' onChange={e => { setUsername(e.target.value) }} />
       </div> */}
       <div className='input-group mb-2 row'>
-        <label class="col-2 col-form-label px14 text-left font-weight-bold mr-3">Email</label>
-        <input type='text' className='form-control col-10' defaultValue={user.email} placeholder='Enter email' onChange={e => { setEmail(e.target.value) }} />
+        <label class="col-3 col-form-label px14 text-left font-weight-bold ">Email</label>
+        <input type='text' className='form-control col-9' defaultValue={user.email} placeholder='Enter email' onChange={e => { setEmail(e.target.value) }} />
+        <i class="fas fa-pencil-alt"></i>
       </div>
       <div className='input-group mb-2 row'>
-        <label class="col-2 col-form-label px14 text-left font-weight-bold mr-3">Name</label>
-        <input type='text' className='form-control col-10' defaultValue={user.name} placeholder='Enter name' onChange={e => { setName(e.target.value) }} />
+        <label class="col-3 col-form-label px14 text-left font-weight-bold ">Name</label>
+        <input type='text' className='form-control col-9' defaultValue={user.name} placeholder='Enter name' onChange={e => { setName(e.target.value) }} />
       </div>
       <div className='input-group mb-2 row'>
-        <label class="col-2 col-form-label px14 text-left font-weight-bold mr-3">Birthday</label>
-        <input type='date' className='form-control col-10' defaultValue={moment(user.birthDate).format('YYYY-MM-DD')}  onChange={e => { setBirthdate(e.target.value) }} />
+        <label class="col-3 col-form-label px14 text-left font-weight-bold ">Birthday</label>
+        <input type='date' className='form-control col-9' defaultValue={moment(user.birthDate).format('YYYY-MM-DD')}  onChange={e => { setBirthdate(e.target.value) }} />
       </div>
       <div className='input-group mb-2 row'>
-        <label class="col-2 col-form-label px14 text-left font-weight-bold mr-3">City</label>
-        <input type='text' className='form-control col-10' defaultValue={user.city} placeholder='Enter city' onChange={e => { setCity(e.target.value) }} />
-          </div>
-      <div className='input-group mb-2 row'>
-        <label class="col-2 col-form-label px14 text-left font-weight-bold mr-3">State</label>
-        <input type='text' className='form-control col-10' defaultValue={user.state} placeholder='Enter state' onChange={e => { setState(e.target.value) }} />
+        <label class="col-3 col-form-label px14 text-left font-weight-bold ">City</label>
+        <input type='text' className='form-control col-9' defaultValue={user.city} placeholder='Enter city' onChange={e => { setCity(e.target.value) }} />
       </div>
       <div className='input-group mb-2 row'>
-        <label class="col-2 col-form-label px14 text-left font-weight-bold mr-3">Bio</label>
-        <textarea type='text' style={{ border: '1px solid #6c757d', borderRadius: '5px', height: '200px', resize: 'none' }} className='form-control' defaultValue={user.bio} placeholder='Enter a brief description of yourself' onChange={e => { setBio(e.target.value) }}></textarea>
+        <label class="col-3 col-form-label px14 text-left font-weight-bold ">State</label>
+        <input type='text' className='form-control col-9' defaultValue={user.state} placeholder='Enter state' onChange={e => { setState(e.target.value) }} />
+      </div>
+      <div className='input-group mb-2 row'>
+        <label class="col-3 col-form-label px14 text-left font-weight-bold ">Bio</label>
+        <textarea type='text' className='form-control' defaultValue={user.bio} placeholder='Enter a brief description of yourself' onChange={e => { setBio(e.target.value) }}></textarea>
       </div>
       <div id='validation-error'>form validation failed</div>
       <input id="upload-photo" type="file" accept="image/*" name="photo" onChange={e => { handlePhotoChange(e) }} />
