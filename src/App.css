@@ -34,7 +34,7 @@ body, html {
 .button-container {
   position: sticky;
   bottom: 30px;
-  margin: 10px;
+  margin: 10px 10px 70px 10px;
   display: flex;
   justify-items: center;
   align-items: center;
@@ -259,7 +259,7 @@ textarea {
     height: calc(275px + 6vmin);
   }
   .button-container {
-    margin: 10px;
+    margin: 10px 10px 50px 10px;
     display: flex;
     justify-items: center;
     align-items: center;

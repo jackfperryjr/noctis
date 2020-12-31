@@ -25,7 +25,7 @@ function App(props) {
         <Route exact path='/' component={login} />
         <Route exact path='/login' component={login} />
         <Route exact path='/register' component={register} />
-        <Route exact path='/profile/view/:id' component={view} />
+        {/* <Route exact path='/profile/view/:id' component={view} /> */}
         <PrivateRoute exact path='/profile' component={profile} />
       </HashRouter>
     </AuthContext.Provider>
