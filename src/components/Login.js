@@ -72,7 +72,7 @@ function Login(props) {
           <div id='validation-error'>enter your credentials</div>
           <button type='submit' className='btn btn-primary btn-block' onClick={(e) => handleLogin(e)}>Login</button>
         </form>
-        <p className='font-regular mt-3'>Or <Link to='/register' className='link'>register</Link></p>
+        <p className='font-regular mt-3'>Or <Link to='/register' className='link'>Register</Link></p>
       </header>
     )
   }

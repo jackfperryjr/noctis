@@ -123,7 +123,7 @@ function Register(props) {
           <div id='validation-error'>form validation failed</div>
           <button type='submit' className='btn btn-primary btn-block' onClick={(e) => handleRegistration(e)}>Register</button>
         </form>
-        <p className='font-regular mt-3'>Or <Link to='/login' className='link'>login</Link></p>
+        <p className='font-regular mt-3'>Or <Link to='/login' className='link'>Login</Link></p>
       </header>
     )
   }

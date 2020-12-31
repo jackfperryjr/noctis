@@ -145,6 +145,10 @@ form {
   margin-bottom: 0;
 }
 
+::placeholder {
+  text-transform: none!important;
+}
+
 input[type="text"],
 input[type="password"],
 input[type="email"],
