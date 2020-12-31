@@ -6,6 +6,10 @@ body, html {
   text-align: center;
 }
 
+.px14 {
+  font-size: 14px;
+}
+
 #overlay {
   display: none;
   position: fixed;
@@ -49,13 +53,13 @@ body, html {
 
 .profile-photo {
   position: relative;
-  top: -200px;
+  top: -145px;
   display: flex;
   align-items: flex-end;
   justify-content: center;
   margin: 0 auto;
-  height: calc(150px + 10vmin);
-  width: calc(150px + 10vmin);
+  height: calc(110px + 10vmin);
+  width: calc(110px + 10vmin);
   background-image: url('https://rikku.blob.core.windows.net/portrait/00000000-0000-0000-0000-000000000000.png');
   background-size: cover;
   overflow: hidden;
@@ -88,7 +92,7 @@ body, html {
   margin: 0 auto;
   width: 100vw;
   max-width: 700px;
-  height: 280px;
+  height: 250px;
   border-bottom-left-radius: 0px;
   border-bottom-right-radius: 0px;
   z-index: 1;
@@ -132,6 +136,7 @@ form {
   width: 100vw;
   max-width: 500px;
   overflow: hidden;
+  padding: 0 20px;
   z-index: 2;
 }
 
@@ -149,11 +154,16 @@ input[type="text"]:focus,
 input[type="password"]:focus,
 input[type="email"]:focus,
 input[type="date"]:focus,
-input[type="number"]:focus  {
+input[type="number"]:focus {
   outline: 0 none;
   border: 1px solid transparent;
-  border-bottom: 1px solid #007bff;
+  border-bottom: 1px solid #6c757d;
   color: #282c34;
+  background-color: transparent!important;
+}
+
+textarea {
+  background-color: transparent!important;
 }
 
 .form-control,

@@ -7,6 +7,7 @@ import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
 import register from './components/Register'
 import login from './components/Login'
 import profile from './components/Profile'
+import view from './components/View'
 import './App.css'
 
 function App(props) {
@@ -24,6 +25,7 @@ function App(props) {
         <Route exact path='/' component={login} />
         <Route exact path='/login' component={login} />
         <Route exact path='/register' component={register} />
+        <Route exact path='/profile/view/:id' component={view} />
         <PrivateRoute exact path='/profile' component={profile} />
       </HashRouter>
     </AuthContext.Provider>
