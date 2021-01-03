@@ -159,11 +159,13 @@ input[type="password"]:focus,
 input[type="email"]:focus,
 input[type="date"]:focus,
 input[type="number"]:focus {
-  outline: 0 none;
+  outline: none!important;
+  outline-style: none!important;
   border: 1px solid transparent;
   /* border-bottom: 1px solid #6c757d; */
   color: #282c34;
   background-color: transparent!important;
+  box-shadow: none;
 }
 
 textarea {
@@ -172,7 +174,9 @@ textarea {
   border-radius: 5px;
   height: 200px!important;
   resize: none;
-  outline: 0 none;
+  outline: none!important;
+  outline-style: none!important;
+  box-shadow: none;
 }
 
 .form-control,
@@ -208,6 +212,21 @@ textarea {
 .login-screen,
 .register-screen {
   padding-top: 100px;
+}
+
+.input-control {
+  border-bottom: 1px solid #e0e0e0!important;
+  border-radius: 0;
+  outline: none!important;
+  outline-style: none!important;
+  box-shadow: none;
+}
+.input-control:focus,
+.input-control:hover {
+  border-bottom: 1px solid #007bff!important;
+  outline: none!important;
+  outline-style: none!important;
+  box-shadow: none;
 }
 
 .link,

@@ -106,19 +106,19 @@ function Register(props) {
         <p>Sign up!</p>
         <form>
           <div className='form-group'>
-            <input type='text' className='form-control' placeholder='Enter username' onChange={e => { setUsername(e.target.value) }} />
+            <input type='text' className='form-control input-control' placeholder='Enter username' onChange={e => { setUsername(e.target.value) }} />
           </div>
           <div className='form-group'>
-            <input type='text' className='form-control' placeholder='Enter name' onChange={e => { setName(e.target.value) }} />
+            <input type='text' className='form-control input-control' placeholder='Enter name' onChange={e => { setName(e.target.value) }} />
           </div>
           <div className='form-group'>
-            <input type='email' className='form-control' placeholder='Enter email' onChange={e => { setEmail(e.target.value) }} />
+            <input type='email' className='form-control input-control' placeholder='Enter email' onChange={e => { setEmail(e.target.value) }} />
           </div>
           <div className='form-group'>
-            <input type='password' className='form-control' placeholder='Enter password' onChange={e => { setPassword(e.target.value) }} />
+            <input type='password' className='form-control input-control' placeholder='Enter password' onChange={e => { setPassword(e.target.value) }} />
           </div>
           <div className='form-group'>
-            <input type='password' className='form-control' placeholder='Confirm password' onChange={e => { setConfirmpassword(e.target.value) }} />
+            <input type='password' className='form-control input-control' placeholder='Confirm password' onChange={e => { setConfirmpassword(e.target.value) }} />
           </div>
           <div id='validation-error'>form validation failed</div>
           <button type='submit' className='btn btn-primary btn-block' onClick={(e) => handleRegistration(e)}>Register</button>
