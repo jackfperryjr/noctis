@@ -32,4 +32,32 @@
     <div id="overlay"><div class="fa-5x"><i class="fas fa-circle-notch fa-spin" aria-hidden="true"></i></div></div>
     <div id="root"></div>
   </body>
+  <script>
+      window.addEventListener('scroll', (event) => {
+          let header = document.getElementById('wallpaper-photo')
+          let photo = document.getElementById('profile-photo')
+          //console.log(window.scrollY)
+          if (window.scrollY > 80) {
+            header.style.position = 'fixed'
+            header.style.height = '100px'
+            header.getElementsByTagName('span')[0].style.display = 'none'
+            photo.getElementsByTagName('span')[0].style.display = 'none'
+            photo.style.position = 'fixed'
+            photo.style.justifyContent = 'flex-start'
+            photo.style.top = '20px'
+            photo.style.height = '50px'
+            photo.style.width = '50px'
+          } else {
+            header.style.position = 'relative'
+            header.style.height = '250px'
+            header.getElementsByTagName('span')[0].style.display = 'block'
+            photo.getElementsByTagName('span')[0].style.display = 'block'
+            photo.style.position = 'relative'
+            photo.style.justifyContent = 'center'
+            photo.style.top = '150px'
+            photo.style.height = 'calc(110px + 10vmin)'
+            photo.style.width = 'calc(110px + 10vmin)'
+          }
+      });
+  </script>
 </html>

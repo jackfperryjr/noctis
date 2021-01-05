@@ -53,7 +53,7 @@ body, html {
 
 .profile-photo {
   position: relative;
-  top: -145px;
+  top: 150px;
   display: flex;
   align-items: flex-end;
   justify-content: center;
@@ -70,6 +70,7 @@ body, html {
   pointer-events: all;
   cursor: pointer;
   z-index: 2;
+  transition: top 0.2s ease-in-out;
 }
 
 .profile-photo > span {
@@ -96,7 +97,8 @@ body, html {
   border-bottom-left-radius: 0px;
   border-bottom-right-radius: 0px;
   z-index: 1;
-  overflow: hidden;
+  /* overflow: hidden; */
+  transition: all 0.2s ease-in-out;
 }
 
 .wallpaper-photo > span {
@@ -271,16 +273,8 @@ textarea {
   }
 
   .profile-photo {
-    position: relative;
-    top: 80px;
-    height: calc(150px + 10vmin);
-    width: calc(150px + 10vmin);
-    margin: -300px 10px 10px 10px;
-    border-radius: 50%;
-    border: 2px solid #fff;
-    object-fit: cover;
-    pointer-events: all;
-    cursor: pointer;
+    height: calc(130px + 10vmin);
+    width: calc(130px + 10vmin);
   }
 
   .profile-form {

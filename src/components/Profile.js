@@ -142,9 +142,9 @@ function Profile(props) {
     <div className='profile-container'>
       <div id='wallpaper-photo' className='wallpaper-photo' style={ userWallpaper ? { backgroundImage: 'url('+userWallpaper+')'} : {} } onClick={handleUserWallpaperUpload}>
       <span><i className="fas fa-camera"></i></span>
-      </div>
-      <div id='profile-photo' className='profile-photo' style={ userPhoto ? { backgroundImage: 'url('+userPhoto+')'} : {} } onClick={handleUserPhotoUpload}>
-        <span><i className="fas fa-camera"></i></span>
+        <div id='profile-photo' className='profile-photo' style={ userPhoto ? { backgroundImage: 'url('+userPhoto+')'} : {} } onClick={handleUserPhotoUpload}>
+          <span><i className="fas fa-camera"></i></span>
+        </div>
       </div>
     </div>
     <form name='profile-form' id='profile-form' className='profile-form' encType='multipart/form-data' method='put'>
@@ -157,32 +157,32 @@ function Profile(props) {
         </button>
       </div>
       {/* <div className='input-group mb-2 row'>
-        <label class="col-3 col-form-label px14 text-left font-weight-bold ">Username</label>
+        <label className="col-3 col-form-label px14 text-left font-weight-bold ">Username</label>
         <input type='text' className='form-control login-username col-9' defaultValue={user.userName} placeholder='Enter username' onChange={e => { setUsername(e.target.value) }} />
       </div> */}
       <div className='input-group mb-2 row'>
-        <label class="col-3 col-form-label px14 text-left font-weight-bold ">Email</label>
+        <label className="col-3 col-form-label px14 text-left font-weight-bold ">Email</label>
         <input type='text' className='form-control col-9' defaultValue={user.email} placeholder='Enter email' onChange={e => { setEmail(e.target.value) }} />
-        <i class="fas fa-pencil-alt"></i>
+        <i className="fas fa-pencil-alt"></i>
       </div>
       <div className='input-group mb-2 row'>
-        <label class="col-3 col-form-label px14 text-left font-weight-bold ">Name</label>
+        <label className="col-3 col-form-label px14 text-left font-weight-bold ">Name</label>
         <input type='text' className='form-control col-9' defaultValue={user.name} placeholder='Enter name' onChange={e => { setName(e.target.value) }} />
       </div>
       <div className='input-group mb-2 row'>
-        <label class="col-3 col-form-label px14 text-left font-weight-bold ">Birthday</label>
+        <label className="col-3 col-form-label px14 text-left font-weight-bold ">Birthday</label>
         <input type='date' className='form-control col-9' defaultValue={moment(user.birthDate).format('YYYY-MM-DD')}  onChange={e => { setBirthdate(e.target.value) }} />
       </div>
       <div className='input-group mb-2 row'>
-        <label class="col-3 col-form-label px14 text-left font-weight-bold ">City</label>
+        <label className="col-3 col-form-label px14 text-left font-weight-bold ">City</label>
         <input type='text' className='form-control col-9' defaultValue={user.city} placeholder='Enter city' onChange={e => { setCity(e.target.value) }} />
       </div>
       <div className='input-group mb-2 row'>
-        <label class="col-3 col-form-label px14 text-left font-weight-bold ">State</label>
+        <label className="col-3 col-form-label px14 text-left font-weight-bold ">State</label>
         <input type='text' className='form-control col-9' defaultValue={user.state} placeholder='Enter state' onChange={e => { setState(e.target.value) }} />
       </div>
       <div className='input-group mb-2 row'>
-        <label class="col-3 col-form-label px14 text-left font-weight-bold ">Bio</label>
+        <label className="col-3 col-form-label px14 text-left font-weight-bold ">Bio</label>
         <textarea type='text' className='form-control' defaultValue={user.bio} placeholder='Enter a brief description of yourself' onChange={e => { setBio(e.target.value) }}></textarea>
       </div>
       <div id='validation-error'>form validation failed</div>
