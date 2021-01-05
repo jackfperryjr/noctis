@@ -34,9 +34,9 @@
   </body>
   <script>
       window.addEventListener('scroll', (event) => {
-          let header = document.getElementById('wallpaper-photo')
-          let photo = document.getElementById('profile-photo')
-          //console.log(window.scrollY)
+        let header = document.getElementById('wallpaper-photo')
+        let photo = document.getElementById('profile-photo')
+        if (window.innerWidth <= 420) {
           if (window.scrollY > 80) {
             header.style.position = 'fixed'
             header.style.height = '120px'
@@ -58,6 +58,7 @@
             photo.style.height = 'calc(110px + 10vmin)'
             photo.style.width = 'calc(110px + 10vmin)'
           }
-      });
+        }
+      })
   </script>
 </html>
