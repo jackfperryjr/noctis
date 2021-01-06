@@ -26,7 +26,7 @@ body, html {
 #username {
   position: relative;
   color: #000;
-  bottom: 0;
+  bottom: -4px;
   z-index: 3;
 }
 
@@ -285,6 +285,13 @@ textarea {
 }
 
 @media (min-width: 768px) {
+  #username {
+    position: relative;
+    color: #000;
+    margin-top: 50px;
+    bottom: 0;
+    z-index: 3;
+  }
   .wallpaper-photo {
     position: relative;
     text-align: center;
@@ -296,22 +303,21 @@ textarea {
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
   }
-
   .profile-photo {
     height: calc(130px + 10vmin);
     width: calc(130px + 10vmin);
   }
-
   .profile-form {
     margin: 0 auto;
     width: 500px;
     max-width: 500px;
+    margin-top: -20px;
   }
   .profile-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: calc(275px + 6vmin);
+    height: calc(300px + 8vmin);
   }
   .button-container {
     margin: 10px 10px 50px 10px;
