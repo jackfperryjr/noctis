@@ -139,16 +139,16 @@ function Profile(props) {
 
   return (
     <div className='form-container form-container-profile component'>
-    <div className='profile-container'>
+    <div id='profile-container' className='profile-container'>
       <div id='wallpaper-photo' className='wallpaper-photo' style={ userWallpaper ? { backgroundImage: 'url('+userWallpaper+')'} : {} } onClick={handleUserWallpaperUpload}>
       <span><i className="fas fa-camera"></i></span>
         <div id='profile-photo' className='profile-photo' style={ userPhoto ? { backgroundImage: 'url('+userPhoto+')'} : {} } onClick={handleUserPhotoUpload}>
           <span><i className="fas fa-camera"></i></span>
         </div>
       </div>
+      <p id='username' className='font-weight-bold'>{user.userName}</p>
     </div>
     <form name='profile-form' id='profile-form' className='profile-form' encType='multipart/form-data' method='put'>
-      <p className='font-weight-bold login-username'>{user.userName}</p>
       <p className='font-small text-secondary'>Joined {moment(user.joinDate).format('MMMM DD, YYYY')}</p>
       <div id='update-notification' className='alert alert-success alert-dismissible text-center fade show small' role='alert' style={{ display: 'none' }}>
         <span style={{ fontSize: '16px' }}>User information updated!</span>
@@ -184,6 +184,17 @@ function Profile(props) {
       <div className='input-group mb-2 row'>
         <label className="col-3 col-form-label px14 text-left font-weight-bold ">Bio</label>
         <textarea type='text' className='form-control' defaultValue={user.bio} placeholder='Enter a brief description of yourself' onChange={e => { setBio(e.target.value) }}></textarea>
+      </div>
+      <div className='row mx-0 photo-grid'>
+        {user.photos.map
+          (x =>
+            <div key={x.id}>
+              { 
+                <img className='photo' src={x.url} alt={x.name} /> 
+              } 
+            </div>
+          )
+        }
       </div>
       <div id='validation-error'>form validation failed</div>
       <input id="upload-photo" type="file" accept="image/*" name="photo" onChange={e => { handlePhotoChange(e) }} />

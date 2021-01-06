@@ -23,12 +23,20 @@ body, html {
   z-index: 1000;
 }
 
+#username {
+  position: relative;
+  color: #000;
+  bottom: 0;
+  z-index: 3;
+}
+
 .profile-container {
   text-align: center;
   margin: 0 auto;
   width: 100vw;
   max-width: 700px;
   height: calc(275px + 1vmin);
+  z-index: 3;
 }
 
 .button-container {
@@ -49,6 +57,18 @@ body, html {
 
 .btn-profile {
   width: 100px;
+}
+
+.photo {
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+}
+
+.photo-grid {
+  display: inline-grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: minmax(min-content, max-content);
 }
 
 .profile-photo {
@@ -84,6 +104,7 @@ body, html {
 }
 
 .wallpaper-photo {
+  display:flex;
   position: relative;
   top: -50px;
   left: 0;
@@ -138,8 +159,12 @@ form {
   width: 100vw;
   max-width: 500px;
   overflow: hidden;
-  padding: 0 20px;
+  /* padding: 0 20px; */
   z-index: 2;
+}
+
+.profile-form > .input-group {
+  padding: 0 20px;
 }
 
 .login-username {

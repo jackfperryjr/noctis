@@ -33,11 +33,30 @@
     <div id="root"></div>
   </body>
   <script>
+      // const debounce = (fn) => {
+      //   let frame;
+      //   return (...params) => {
+      //     if (frame) { 
+      //       cancelAnimationFrame(frame);
+      //     }
+      //     frame = requestAnimationFrame(() => {
+      //       fn(...params);
+      //     });
+      //   } 
+      // };
+      // const storeScroll = () => {
+      //   document.documentElement.dataset.scroll = window.scrollY;
+      // }
+      // document.addEventListener('scroll', debounce(storeScroll), { passive: true });
+      // storeScroll();
+
       window.addEventListener('scroll', (event) => {
         let header = document.getElementById('wallpaper-photo')
         let photo = document.getElementById('profile-photo')
+        let username = document.getElementById('username')
         if (window.innerWidth <= 420) {
-          if (window.scrollY > 80) {
+          console.log(window.pageYOffset + 'px')
+          if (window.scrollY > 60) {
             header.style.position = 'fixed'
             header.style.height = '120px'
             header.getElementsByTagName('span')[0].style.display = 'none'
@@ -47,6 +66,10 @@
             photo.style.top = '40px'
             photo.style.height = '50px'
             photo.style.width = '50px'
+            username.style.position = 'fixed'
+            username.style.right = '20px'
+            username.style.top = '46px'
+            username.style.color = '#fff'
           } else {
             header.style.position = 'relative'
             header.style.height = '250px'
@@ -57,6 +80,11 @@
             photo.style.top = '150px'
             photo.style.height = 'calc(110px + 10vmin)'
             photo.style.width = 'calc(110px + 10vmin)'
+            username.style.position = 'relative'
+            username.style.top = '0'
+            username.style.right = '0'
+            username.style.bottom = '0'
+            username.style.color = '#000'
           }
         }
       })
